@@ -1,6 +1,14 @@
 let express = require('express')
 let bodyParser = require('body-parser')
+// Search youtube
+// 		get song title from url
 let youtubeParser = require('youtube-parser');
+let YoutubeSearch = require('youtube-node');
+let validUrl = require('valid-url');
+//		get song url from name
+let youtubeSearch = new YoutubeSearch().setKey('AIzaSyCHJm6PCl0UTLx_dVTxb3CHP3i2GJf7AYY');
+
+// Express stuff
 let cors = require('cors');
 let app = express() 
 app.use(bodyParser.json())
@@ -89,6 +97,10 @@ let addSongByUrl = function(song, q) {
 	}
 }
 
+function addSongByName(song, queue) {
+	console.log("lol worked");
+}
+
 app.get('/popNextSong', function (req, res) {
    res.send(JSON.stringify(popNextSong(queue, playlist)))
 })
@@ -112,9 +124,19 @@ app.listen(3001, function() {
 })
 
 app.post('/addSong', function(req, res){
-	addSongByUrl(req.body, queue);
-	//TODO: fail check
-	res.end("Added?");
+	// TODO: make better
+	// Test if a url
+	if((validUrl(req.body.url))) {
+		if((req.body.url.includes('youtu.be/') || 
+			req.body.url.includes('youtube.com/'))) {
+				addSongByUrl(req.body, queue);	
+		} else {
+			res.statusCode(400);
+		}
+	}
+	else {
+		addSongByName(req.body, queue).then((resolve, reject) => res.statusCode(200));
+	}
 })
 
 
