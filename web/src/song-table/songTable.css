@@ -1,0 +1,53 @@
+.song-table-header {
+    margin-left: 8px;
+    color: #88898c;
+    text-transform: uppercase;
+}
+
+.song--active {
+    color: #47a0ff;
+}
+
+.song-table {
+    font-size: 16px;
+}
+.song-row {
+    display: flex;
+    height: 48px;
+    align-items: center;
+}
+.song-row:hover {
+    background: #292929;
+}
+
+.song-row--play-button {
+    visibility: hidden;
+    margin: 8px;
+    cursor: pointer;
+    color: white;
+}
+
+.song-row:hover > .song-row--play-button {
+    visibility: visible;
+}
+    
+.song-row--votes {
+    margin-right: 16px;
+    margin-left: 8px;
+}
+
+.song-row--vote {
+    margin: 4px;
+    cursor: pointer;    
+}
+
+.song-row--vote__active {
+    color: #47a0ff;
+} 
+.song-row--vote-up {
+
+}
+
+.song-row--vote-up {
+    
+}
