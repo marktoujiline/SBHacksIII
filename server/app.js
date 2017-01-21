@@ -6,12 +6,14 @@ let app = express()
 app.use(bodyParser.json())
 app.use(cors())
 
+//TODO Add timestamp on adding for sorting.
 let queue = [];
 let playlist = [];
+// libraru to add to from to playlist 
 
 let getNextSong = function(q, p) {
-	console.log("Queue.length: " + queue.length);
-	console.log("Playlist.length: " + playlist.length);
+	console.log("Queue.length: " + q.length);
+	console.log("Playlist.length: " + p.length);
 	if(q.length > 0){
 		return q.first();	
 	} else if (p.length > 0) {
@@ -23,10 +25,27 @@ let getNextSong = function(q, p) {
 }
 
 //TODO get playlist by number
+let getUpcomingSongs = function(q, p, n) {
+	let upcoming = [];
+	console.log("Queue.length: " + p.length);
+	console.log("Playlist.length: " + p.length);
+
+	for(i = 0 ; i < n ; i++) {
+		if(q.length > i){
+			upcoming.push(q[i]);	
+		} else if (p.length >= i - q.length) {
+			upcoming.push(p[i - q.length]);
+		} else {
+			//TODO Scramble playlist, then return p.first();	
+		}
+	}
+	return upcoming;
+}
+
 
 let popNextSong = function(q, p) {
-	console.log("Queue.length: " + queue.length);
-	console.log("Playlist.length: " + playlist.length);
+	console.log("Queue.length: " + q.length);
+	console.log("Playlist.length: " + p.length);
 	if(q.length > 0){
 		return q.pop();	
 	} else if (p.length > 0) {
@@ -48,6 +67,7 @@ let addSongByUrl = function(song, q) {
 	if (existingSong == null){
 		youtubeParser.getMetadata(song.url).then(
 			(metadata) => {
+				console.log("Adding song to queue");
 				q.push({
 					url: song.url,
 					title: metadata.title,
@@ -56,6 +76,7 @@ let addSongByUrl = function(song, q) {
 			});
 		});
 	} else {
+		console.log("Song already in queue, upvoting");
 		existingSong.votes++;
 		//TODO sort by priority
 	}
@@ -70,8 +91,25 @@ app.get('/getQueue', function (req, res) {
 	res.send(queue)
 })
 
+app.get('/getUpcomingSongs', function (req, res) {
+	let n = 5;
+	//TODO set number of elements
+	res.send(getUpcomingSongs(queue,playlist,n));
+	//res.send(playlist);
+})
+
 app.listen(3001, function() {
 	console.log('Listening on port 3001');
+	hardcodeSongs();
+})
+
+app.post('/addSong', function(req, res){
+	addSongByUrl(req.body, queue);
+	//TODO: fail check
+	res.end("Added?");
+})
+
+let hardcodeSongs = function(){
 	addSongByUrl({
 		url : "https://www.youtube.com/watch?v=f8E07NEZMAs",
 		user : "Admin"
@@ -92,11 +130,4 @@ app.listen(3001, function() {
 		url : "https://www.youtube.com/watch?v=Fz8h_q4qvNk",
 		user : "Admin"
 	}, playlist);	
-})
-
-app.post('/addSong', function(req, res){
-	addSongByUrl(req.body, queue);
-	//TODO: Different statements depending on if song exist (return number of votes?)
-	res.end("Song added yao");
-	//TODO: fail check
-})
+}
