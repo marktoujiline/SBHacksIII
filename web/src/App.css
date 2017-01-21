@@ -1,0 +1,26 @@
+.App-header {
+  text-align: center;
+}
+
+.main-player {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.controls {
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.controls > .material-icons {
+    font-size: 64px;
+    cursor: pointer;
+}
+
+.icon-hidden {
+    visibility: hidden;
+}
