@@ -16,18 +16,20 @@ class App extends Component {
     // Setup initial state
     this.state = {
             playSong: false,
-            playUrl: '',
+            currentSong: {},
             queue: []
           };
   }
 
   componentDidMount(){
+
     this.netService.getNextSong().then(
       (song) => {
         // When new song, play that song
+        console.log("new song: " + song)
         this.setState({
             playSong: true,
-            playUrl: song.url
+            currentSong: song
         });
       },
       (err) => console.log(err));
@@ -41,11 +43,11 @@ class App extends Component {
     return (
       <div className="App">
 
-        <div className="App-header container">
-          <h2>Muuse Player</h2>
+        <div className="App-header">
+          <h1>Muuse Player</h1>
         </div>
 
-    <div className="main-player" >
+        <div className="main-player" >
             <div className="controls">
               <i className="material-icons icon-hidden" onClick={() => this.skipSong()}>skip_previous</i>
               {
@@ -56,26 +58,28 @@ class App extends Component {
               }                    
               <i className="material-icons" onClick={() => this.skipSong()}>skip_next</i>
             </div>
-        </div>
-        <div className="center-content">
-          <ReactPlayer 
-              url={this.state.playUrl} 
+
+          <ReactPlayer
+              url={this.state.currentSong.url} 
               width={this.pageWith / 2 } 
               height={(this.pageWith / 25) * 9}
               onEnded={() => this.netService.getNextSong()}
-              playing={this.state.playSong}/>   
+              playing={this.state.playSong}/>
               
-              <SongTable className="song-table" 
-                         current={this.state.playUrl} 
+              <SongTable className="song-table"
+                         style={{height: this.pageWith /25 * 9}} 
+                         current={this.state.currentSong} 
                          voteUpCallback={(i) => this.netService.vote(this.state.queue[i])} 
                          songs={this.state.queue}></SongTable>
-          </div>
+        </div>
+        
+        
       </div>
     );
   }
 
   toggleSongPlayback() {
-    if (this.state.playUrl === '') return;
+    if (this.state.currentSong.url === '') return;
     this.setState((prev) => {
       return {playSong: !prev.playSong}
     });
@@ -83,15 +87,16 @@ class App extends Component {
 
   skipSong() {
     // no song selected, not able to move 
-    if(this.state.playUrl === '') {
+    if(this.state.currentSong.url === '') {
       return;
     }
 
     this.netService.getNextSong()
       .then((song) => {
           // Set the new song
+          console.log(song);
           this.setState({
-            playUrl: song.url
+            currentSong: song
           });
       }, (err) => {console.error(err)});
   }
@@ -101,7 +106,7 @@ class App extends Component {
    */
   stopPlayback() {
     this.setState({
-      playUrl: '',
+      currentSong: {},
       playSong: false
     });
   }

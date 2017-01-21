@@ -8,6 +8,10 @@
     color: #47a0ff;
 }
 
+.song-row--placeholder {
+    margin-left: 24px;
+}
+
 .song-table {
     font-size: 16px;
 }
