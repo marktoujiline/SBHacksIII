@@ -12,7 +12,8 @@
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
     "react-player": "^0.14.1",
-    "rxjs": "^5.0.3"
+    "rxjs": "^5.0.3",
+    "whatwg-fetch": "^2.0.2"
   },
   "scripts": {
     "start": "react-scripts start",
