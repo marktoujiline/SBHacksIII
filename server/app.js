@@ -9,11 +9,10 @@ app.use(cors())
 //TODO Add timestamp on adding for sorting.
 let queue = [];
 let playlist = [];
-// libraru to add to from to playlist 
+//TODO dont add to playlist what's already in queue
+//TODO libraru to add to from to playlist 
 
 let getNextSong = function(q, p) {
-	console.log("Queue.length: " + q.length);
-	console.log("Playlist.length: " + p.length);
 	if(q.length > 0){
 		return q.first();	
 	} else if (p.length > 0) {
@@ -24,12 +23,21 @@ let getNextSong = function(q, p) {
 	}
 }
 
+let sortPlaylist = function(p){
+	p.sort(function(a,b) {
+		let votesA = parseInt(a.votes);
+		let votesB = parseInt(b.votes);
+		if (votesA != votesB) {
+			return votesB - votesA;
+		} else {
+			return a.date - b.date;
+		}
+	});
+}
+
 //TODO get playlist by number
 let getUpcomingSongs = function(q, p, n) {
 	let upcoming = [];
-	console.log("Queue.length: " + p.length);
-	console.log("Playlist.length: " + p.length);
-
 	for(i = 0 ; i < n ; i++) {
 		if(q.length > i){
 			upcoming.push(q[i]);	
@@ -44,8 +52,6 @@ let getUpcomingSongs = function(q, p, n) {
 
 
 let popNextSong = function(q, p) {
-	console.log("Queue.length: " + q.length);
-	console.log("Playlist.length: " + p.length);
 	if(q.length > 0){
 		return q.pop();	
 	} else if (p.length > 0) {
@@ -67,16 +73,15 @@ let addSongByUrl = function(song, q) {
 	if (existingSong == null){
 		youtubeParser.getMetadata(song.url).then(
 			(metadata) => {
-				console.log("Adding song to queue");
 				q.push({
-					url: song.url,
 					title: metadata.title,
+					url: song.url,
 					user: song.user,
-					votes: 1
+					votes: 1,
+					date: new Date
 			});
 		});
 	} else {
-		console.log("Song already in queue, upvoting");
 		existingSong.votes++;
 		//TODO sort by priority
 	}
@@ -93,6 +98,7 @@ app.get('/getQueue', function (req, res) {
 
 app.get('/getUpcomingSongs', function (req, res) {
 	let n = 5;
+	sortPlaylist(queue);
 	//TODO set number of elements
 	res.send(getUpcomingSongs(queue,playlist,n));
 	//res.send(playlist);
