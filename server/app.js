@@ -15,17 +15,18 @@ let library = [];
 //TODO libraru to add to from to playlist 
 //TODO Remove from playlist when adding to queue (dont just add without check)
 
-let getNextSong = function(q, p) {
-	if(q.length > 0){
-		return q.first();	
-	} else if (p.length > 0) {
-		return p.first();
-	} else {
-		//TODO Scramble playlist, then return p.first();
-		return null;	
+/**
+ *	Fills p, with songs from l until p.size = n
+ */
+let fillPlaylist = function(p, l, n){
+	while(p.length < n && p.length < l.length){
+		p.push(l[Math.floor(Math.random() * l.length)]);
 	}
 }
 
+/**
+ *	Sorts playlist by votes then date
+ */
 let sortPlaylist = function(p){
 	p.sort(function(a,b) {
 		let votesA = parseInt(a.votes);
@@ -56,7 +57,9 @@ let getUpcomingSongs = function(q, p, n) {
 	return upcoming;	
 }
 
-
+/**
+ *	Gets and removes the next song to be played from q (or p if q is empty)
+ */
 let popNextSong = function(q, p) {
 	fillPlaylist(playlist, library, playlistLength); //TODO remove this and create proper promise, should call in add song
 	if(q.length > 0){
@@ -124,16 +127,6 @@ app.post('/addSong', function(req, res){
 	res.end("Added?");
 })
 
-/**
- *	Fills p, with songs from l until p.size = n
- */
-let fillPlaylist = function(p, l, n){
-	console.log("started fill " + l.length);
-	while(p.length < n && p.length < l.length){
-		console.log("added from library to playlist");
-		p.push(l[Math.floor(Math.random() * l.length)]);
-	}
-}
 
 let hardcodeSongs = function(){
 	addSongByUrl({
