@@ -106,7 +106,7 @@ app.get('/getUpcomingSongs', function (req, res) {
 	//res.send(playlist);
 })
 
-app.listen(3001, function() {
+app.listen(8081, function() {
 	console.log('Listening on port 3001');
 	hardcodeSongs();
 })
