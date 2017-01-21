@@ -1,7 +1,8 @@
 let express = require('express')
 let bodyParser = require('body-parser')
+let youtubeParser = require('youtube-parser');
 let app = express() 
-app.use(bodyParser.json({ type: 'application/*+json' }))
+app.use(bodyParser.json())
 
 let queue = [];
 let playlist = [];
@@ -12,23 +13,34 @@ let playlist = [];
 let getNextSong = function(q, p) {
 	//if(! q.empty())
 	//	return  q.pop()
-	//else 
+	//else if
 	//	return p.pop();
- 
-	return "Bad blood";
+ 	//else
+	//	scramble new playlist
+	
+	return JSON.stringify(q.pop());
 }
 
-
+/**
+ *	Adds a song to queue. If song exists, vote up by one
+ */
 let addSongByUrl = function(song, q) {
-	//TODO: upvote if exist
-	q.push({
-		url: "URl",//song.url,
-		title: "TITLE",
-		user: "User",//song.user,
-		votes: 1
-	})
-	console.log('LL');
-	return;
+	existingSong = q.find((s) => {
+		return s.url == song.url;
+	});
+	if (existingSong == null){
+		youtubeParser.getMetadata(song.url).then(
+			(metadata) => {
+				q.push({
+					url: song.url,
+					title: metadata.title,
+					user: song.user,
+					votes: 1
+			});
+		});
+	} else {
+		existingSong.votes++;
+	}
 }
 
 app.get('/', function (req, res) {
@@ -58,6 +70,8 @@ app.listen(3000, function() {
 
 app.post('/addSong', function(req, res){
 	addSongByUrl(req.body, queue);
-	res.end(getNextSong());
+	
+	//TODO: Different statements depending on if song exist (return number of votes?)
+	res.end("Song added yao");
 	//TODO: fail check
 })
