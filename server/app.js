@@ -7,9 +7,6 @@ app.use(bodyParser.json())
 let queue = [];
 let playlist = [];
 
-//TODO
-//needs to figure out which song to return from q and p
-//if q is empty, 
 let getNextSong = function(q, p) {
 	console.log("Queue.length: " + queue.length);
 	console.log("Playlist.length: " + playlist.length);
@@ -69,8 +66,8 @@ app.get('/getQueue', function (req, res) {
 	res.send(queue)
 })
 
-app.listen(3000, function() {
-	console.log('Listening on port 3000');
+app.listen(3001, function() {
+	console.log('Listening on port 3001');
 	addSongByUrl({
 		url : "https://www.youtube.com/watch?v=f8E07NEZMAs",
 		user : "Admin"
@@ -79,7 +76,21 @@ app.listen(3000, function() {
 		url : "https://www.youtube.com/watch?v=-zHVW7Zy_vg",
 		user : "Admin"
 	}, playlist);
-})
+	addSongByUrl({
+		url : "https://www.youtube.com/watch?v=1Ga5o7JJquQ",
+		user : "Admin"
+	}, playlist);
+	addSongByUrl({
+		url : "https://www.youtube.com/watch?v=sWj2KV2jEPc",
+		user : "Admin"
+	}, playlist);
+	addSongByUrl({
+		url : "https://www.youtube.com/watch?v=Fz8h_q4qvNk",
+		user : "Admin"
+	}, playlist);
+
+	
+	})
 
 app.post('/addSong', function(req, res){
 	addSongByUrl(req.body, queue);
