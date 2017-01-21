@@ -1,7 +1,7 @@
 let express = require('express')
 let bodyParser = require('body-parser')
 let app = express() 
-app.use(bodyParser.json({ type: 'application/*+json' }))
+app.use(bodyParser.json())
 
 let queue = [];
 let playlist = [];
@@ -15,19 +15,19 @@ let getNextSong = function(q, p) {
 	//else 
 	//	return p.pop();
  
-	return "Bad blood";
+	return JSON.stringify(q.pop());
 }
 
 
 let addSongByUrl = function(song, q) {
+	
 	//TODO: upvote if exist
 	q.push({
-		url: "URl",//song.url,
+		url: song.url,
 		title: "TITLE",
-		user: "User",//song.user,
+		user: song.user,
 		votes: 1
 	})
-	console.log('LL');
 	return;
 }
 
@@ -58,6 +58,6 @@ app.listen(3000, function() {
 
 app.post('/addSong', function(req, res){
 	addSongByUrl(req.body, queue);
-	res.end(getNextSong());
+	res.end(getNextSong(queue, playlist));
 	//TODO: fail check
 })
