@@ -18,17 +18,24 @@ let getNextSong = function(q, p) {
 	return JSON.stringify(q.pop());
 }
 
-
+/**
+ *	Adds a song to queue. If song exists, vote up by one
+ */
 let addSongByUrl = function(song, q) {
-	
-	//TODO: upvote if exist
-	q.push({
-		url: song.url,
-		title: "TITLE",
-		user: song.user,
-		votes: 1
-	})
-	return;
+
+	existingSong = q.find((s) => {
+		return s.url == song.url;
+	});
+	if (existingSong == null){
+		q.push({
+			url: song.url,
+			title: "TITLE",
+			user: song.user,
+			votes: 1
+		});
+	} else {
+		existingSong.votes++;
+	}
 }
 
 app.get('/', function (req, res) {
@@ -58,6 +65,8 @@ app.listen(3000, function() {
 
 app.post('/addSong', function(req, res){
 	addSongByUrl(req.body, queue);
-	res.end(getNextSong(queue, playlist));
+	
+	//TODO: Different statements depending on if song exist (return number of votes?)
+	res.end("Song added yao");
 	//TODO: fail check
 })
