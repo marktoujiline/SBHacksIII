@@ -9,6 +9,7 @@ app.use(cors())
 //TODO Add timestamp on adding for sorting.
 let queue = [];
 let playlist = [];
+let library = [];
 //TODO dont add to playlist what's already in queue
 //TODO libraru to add to from to playlist 
 
@@ -38,24 +39,25 @@ let sortPlaylist = function(p){
 //TODO get playlist by number
 let getUpcomingSongs = function(q, p, n) {
 	let upcoming = [];
-	for(i = 0 ; i < n ; i++) {
+	for(i = 0 ; i < Math.min(n, q.length+p.length) ; i++) {
 		if(q.length > i){
 			upcoming.push(q[i]);	
 		} else if (p.length >= i - q.length) {
 			upcoming.push(p[i - q.length]);
 		} else {
-			//TODO Scramble playlist, then return p.first();	
+			console.err("getUpcoming error lol");
 		}
 	}
-	return upcoming;
+	return upcoming;	
 }
 
 
 let popNextSong = function(q, p) {
 	if(q.length > 0){
-		return q.pop();	
+		return q.shift();	
 	} else if (p.length > 0) {
-		return p.pop();
+		//TODO push new song to playlist
+		return p.shift();
 	} else {
 		//TODO Scramble playlist, then return p.first();
 		return null;	
@@ -114,6 +116,7 @@ app.post('/addSong', function(req, res){
 	//TODO: fail check
 	res.end("Added?");
 })
+
 
 let hardcodeSongs = function(){
 	addSongByUrl({
