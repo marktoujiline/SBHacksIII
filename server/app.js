@@ -1,8 +1,10 @@
 let express = require('express')
 let bodyParser = require('body-parser')
 let youtubeParser = require('youtube-parser');
+let cors = require('cors');
 let app = express() 
 app.use(bodyParser.json())
+app.use(cors())
 
 let queue = [];
 let playlist = [];
@@ -19,6 +21,8 @@ let getNextSong = function(q, p) {
 		return null;	
 	}
 }
+
+//TODO get playlist by number
 
 let popNextSong = function(q, p) {
 	console.log("Queue.length: " + queue.length);
@@ -87,10 +91,8 @@ app.listen(3001, function() {
 	addSongByUrl({
 		url : "https://www.youtube.com/watch?v=Fz8h_q4qvNk",
 		user : "Admin"
-	}, playlist);
-
-	
-	})
+	}, playlist);	
+})
 
 app.post('/addSong', function(req, res){
 	addSongByUrl(req.body, queue);
