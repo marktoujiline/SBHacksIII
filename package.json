@@ -1,0 +1,26 @@
+{
+  "name": "sbhacks3",
+  "version": "1.0.0",
+  "description": "The best music service. ever.",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.14.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mtoujiline/SBHacksIII.git"
+  },
+  "keywords": [
+    "dope"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mtoujiline/SBHacksIII/issues"
+  },
+  "homepage": "https://github.com/mtoujiline/SBHacksIII#readme"
+}
