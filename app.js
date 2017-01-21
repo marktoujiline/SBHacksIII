@@ -4,9 +4,9 @@ var app = express()
 var queue = [];
 var playlist = [];
 
-#TODO
-#needs to figure out which song to return from q and p
-#if q is empty, 
+//TODO
+//needs to figure out which song to return from q and p
+//if q is empty, 
 var getNextSong = function(q, p) {
    return "Bad blood";
 }
