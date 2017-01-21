@@ -1,5 +1,6 @@
 let express = require('express')
 let bodyParser = require('body-parser')
+let youtubeParser = require('youtube-parser');
 let app = express() 
 app.use(bodyParser.json())
 
@@ -12,9 +13,11 @@ let playlist = [];
 let getNextSong = function(q, p) {
 	//if(! q.empty())
 	//	return  q.pop()
-	//else 
+	//else if
 	//	return p.pop();
- 
+ 	//else
+	//	scramble new playlist
+	
 	return JSON.stringify(q.pop());
 }
 
@@ -22,16 +25,18 @@ let getNextSong = function(q, p) {
  *	Adds a song to queue. If song exists, vote up by one
  */
 let addSongByUrl = function(song, q) {
-
 	existingSong = q.find((s) => {
 		return s.url == song.url;
 	});
 	if (existingSong == null){
-		q.push({
-			url: song.url,
-			title: "TITLE",
-			user: song.user,
-			votes: 1
+		youtubeParser.getMetadata(song.url).then(
+			(metadata) => {
+				q.push({
+					url: song.url,
+					title: metadata.title,
+					user: song.user,
+					votes: 1
+			});
 		});
 	} else {
 		existingSong.votes++;

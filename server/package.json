@@ -5,7 +5,8 @@
   "main": "app.js",
   "dependencies": {
     "body-parser": "^1.16.0",
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "youtube-parser": "^1.1.0"
   },
   "devDependencies": {},
   "scripts": {
