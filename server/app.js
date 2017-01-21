@@ -11,14 +11,29 @@ let playlist = [];
 //needs to figure out which song to return from q and p
 //if q is empty, 
 let getNextSong = function(q, p) {
-	//if(! q.empty())
-	//	return  q.pop()
-	//else if
-	//	return p.pop();
- 	//else
-	//	scramble new playlist
-	
-	return JSON.stringify(q.pop());
+	console.log("Queue.length: " + queue.length);
+	console.log("Playlist.length: " + playlist.length);
+	if(q.length > 0){
+		return q.first();	
+	} else if (p.length > 0) {
+		return p.first();
+	} else {
+		//TODO Scramble playlist, then return p.first();
+		return null;	
+	}
+}
+
+let popNextSong = function(q, p) {
+	console.log("Queue.length: " + queue.length);
+	console.log("Playlist.length: " + playlist.length);
+	if(q.length > 0){
+		return q.pop();	
+	} else if (p.length > 0) {
+		return p.pop();
+	} else {
+		//TODO Scramble playlist, then return p.first();
+		return null;	
+	}
 }
 
 /**
@@ -28,6 +43,7 @@ let addSongByUrl = function(song, q) {
 	existingSong = q.find((s) => {
 		return s.url == song.url;
 	});
+
 	if (existingSong == null){
 		youtubeParser.getMetadata(song.url).then(
 			(metadata) => {
@@ -40,37 +56,33 @@ let addSongByUrl = function(song, q) {
 		});
 	} else {
 		existingSong.votes++;
+		//TODO sort by priority
 	}
 }
 
-app.get('/', function (req, res) {
-   let json = JSON.stringify({
-      key : 'value',
-      key1: 'value1'
-   });
-   res.send(json)
+app.get('/popNextSong', function (req, res) {
+   res.send(JSON.stringify(popNextSong(queue, playlist)))
 })
 
-app.get('/song', function (req, res) {
-   
-   let json = JSON.stringify({
-      key : 'blah',
-      key1: 'blah'
-   });
-   res.send(getNextSong(queue, playlist))
-})
-
-app.get('/queue', function (req, res) {
-   res.send(queue)
+app.get('/getQueue', function (req, res) {
+	//TODO set number of elements
+	res.send(queue)
 })
 
 app.listen(3000, function() {
-   console.log('Listening on port 3000');
+	console.log('Listening on port 3000');
+	addSongByUrl({
+		url : "https://www.youtube.com/watch?v=f8E07NEZMAs",
+		user : "Admin"
+	}, playlist);
+	addSongByUrl({
+		url : "https://www.youtube.com/watch?v=-zHVW7Zy_vg",
+		user : "Admin"
+	}, playlist);
 })
 
 app.post('/addSong', function(req, res){
 	addSongByUrl(req.body, queue);
-	
 	//TODO: Different statements depending on if song exist (return number of votes?)
 	res.end("Song added yao");
 	//TODO: fail check
