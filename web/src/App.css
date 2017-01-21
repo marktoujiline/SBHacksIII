@@ -11,16 +11,26 @@
 
 .controls {
     margin-top: 30px;
+    margin-bottom: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .controls > .material-icons {
-    font-size: 64px;
+    font-size: 72px;
     cursor: pointer;
 }
 
 .icon-hidden {
     visibility: hidden;
+}
+
+.center-content {
+    display: flex;
+    align-content: center;   
+}
+
+.song-table {
+    width: 50%;
 }

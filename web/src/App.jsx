@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import NetworkService from './network-service/NetworkService';
 import ReactPlayer from 'react-player'
-import ControlBar from './playback-control-bar/ControlBar';
+import SongTable from './song-table/SongTable';
 import './App.css';
 
 
@@ -10,24 +10,31 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    this.netService = new NetworkService;
+    this.netService = new NetworkService();
+    this.pageWith = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 
     // Setup initial state
     this.state = {
             playSong: false,
-            playUrl: ''
+            playUrl: '',
+            queue: []
           };
-    
+  }
+
+  componentDidMount(){
     this.netService.getNextSong().then(
       (song) => {
         // When new song, play that song
-        console.log(song);
         this.setState({
             playSong: true,
             playUrl: song.url
         });
       },
       (err) => console.log(err));
+
+      this.netService.getPlaylist().subscribe((newQ) => {
+          this.setState({queue: newQ});
+      });
   }
 
   render() {
@@ -39,14 +46,6 @@ class App extends Component {
         </div>
 
     <div className="main-player" >
-
-          <ReactPlayer 
-            url={this.state.playUrl} 
-            width="500px" 
-            height="400px" 
-            onEnded={() => this.netService.getNextSong()}
-            playing={this.state.playSong}/> 
-
             <div className="controls">
               <i className="material-icons icon-hidden" onClick={() => this.skipSong()}>skip_previous</i>
               {
@@ -57,8 +56,20 @@ class App extends Component {
               }                    
               <i className="material-icons" onClick={() => this.skipSong()}>skip_next</i>
             </div>
-            
         </div>
+        <div className="center-content">
+          <ReactPlayer 
+              url={this.state.playUrl} 
+              width={this.pageWith / 2 } 
+              height={(this.pageWith / 25) * 9}
+              onEnded={() => this.netService.getNextSong()}
+              playing={this.state.playSong}/>   
+              
+              <SongTable className="song-table" 
+                         current={this.state.playUrl} 
+                         voteUpCallback={(i) => this.netService.vote(this.state.queue[i])} 
+                         songs={this.state.queue}></SongTable>
+          </div>
       </div>
     );
   }

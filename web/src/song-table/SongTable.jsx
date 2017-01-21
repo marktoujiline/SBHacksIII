@@ -22,19 +22,13 @@ export default class SongTable extends Component {
         return (
             <div
                 className={"song-row row " + (this.props.current === song.url ? "song--active" : "")} 
-                key={"__song-" + i} 
+                key={"__song-" + i}
+                onClick={() => this.props.voteUpCallback(i)}
                 >
-                <div className="song-row--play-button"
-                     onClick={() => {this.props.playCallback(song.url)}}>
-                      <i className="material-icons">play_circle_filled</i>
-                </div>
                 <div className="song-row--votes">{song.votes}</div>
                 <div className="song-row--name">{song.name + " - " + song.by}</div>
                 <div className="song-row--vote song-row--vote-up">
-                    <i className="material-icons" onClick={() => this.props.voteUpCallback(i)}>keyboard_arrow_up</i>
-                </div>
-                <div className="song-row--vote song-row--vote-down" onClick={() => this.props.voteDownCallback(i)}>
-                    <i className="material-icons">keyboard_arrow_down</i>
+                    <i className="material-icons">keyboard_arrow_up</i>
                 </div>
             </div>)
         })
