@@ -26,7 +26,7 @@ class SongManager {
 			song.votes = 1;
 			song.date = new Date();
             this.queue.push(song);
-            i = this.playlist.map((song) => song.url).indexOf(song.title);
+            i = this.playlist.map((song) => song.url).indexOf(song.url);
             if (i !== -1) {
                 // Remove from playlist of pressent
                 this.playlist.splice(i,1);
@@ -40,16 +40,17 @@ class SongManager {
     }
 
     addToPlaylist(song) {
-        let i = this.queue.map((song) => song.url).indexOf(song.title);
-        let j = this.playlist.map((song) => song.url).indexOf(song.title);        
+        let i = this.queue.map((song) => song.url).indexOf(song.url);
+        let j = this.playlist.map((song) => song.url).indexOf(song.url);        
         if ( i == -1 && j == -1) {
 			song.votes = 0;
             this.playlist.push(song);
         }
     }
 
-    addToLibrary(song) {
-        let j = this.library.map((song) => song.url).indexOf(song.title);
+	addToLibrary(song) {
+		//console.out("Adding to library");
+        let j = this.library.map((song) => song.url).indexOf(song.url);
         if (j === -1) {
             this.library.push(song);
         }
@@ -70,7 +71,7 @@ class SongManager {
     addToQueueByName(name, user) {
         return new Promise((resolve, reject) => {
             // Search for the url
-            youtubeSearch.search(name, 1, function(error, result) {
+            youtubeSearch.search(name, 1, (error, result) => {
 				if (error) {
 					console.log(error);
 					reject(error);
@@ -88,8 +89,10 @@ class SongManager {
 						votes: 0,
 						date: new Date
 					};
+					
+					console.log("Creating by name: ");
 
-                    this.addToLibrary(sobj);
+                    ///this.addToLibrary(sobj);
 					this.addToQueue(sobj);
 					resolve(sobj);
 				}
@@ -104,6 +107,7 @@ class SongManager {
     addToQueueByURL(song, user) {
         return this.createSongFromURL(song, user)
                 .then((o) => {
+					//this.addToLibrary(o);
                     this.addToQueue(o);
                     return o;
                 });
@@ -145,9 +149,6 @@ class SongManager {
      */
     getNext() {
         this.fillPlaylist(6);
-		console.log("Get nexxt queue: " + this.queue.length);
-		console.log("Get nexxt playlist: " + this.playlist.length);
-		console.log("Get nexxt library: " + this.library.length);
 		if(this.queue.length > 0) {
             return this.queue.shift();
         } else {

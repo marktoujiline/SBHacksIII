@@ -29,8 +29,7 @@ app.post('/addSongByUrl', function(req, res){
 	// TODO: make better
 	// Test if a url
 	if((validUrl.isUri(req.body.url))) {
-		console.log("here");
-		if((req.body.url.includes('youtu.be/') || 
+		if((req.body.url.includes('youtu.be/') || //TODO normilize address 
 			req.body.url.includes('youtube.com/'))) {
 				sm.addToQueueByURL(req.body.url, req.body.user);
 				res.status(200).send("added");
@@ -39,13 +38,12 @@ app.post('/addSongByUrl', function(req, res){
 		}
 	}
 	else {
-		sm.addToQueueByURL(req.body.url, req.body.user).then(
+		sm.addToQueueByName(req.body.url, req.body.user).then(
 			(result) => {
 				console.log(result);
 				res.status(200).send(result);
 			},
 			(err) => {
-				console.log("here")
 				console.log(err)
 				
 				res.status(500).send(err)
