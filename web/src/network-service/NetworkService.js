@@ -4,18 +4,26 @@ import 'whatwg-fetch';
 export default class NetworkService {
 
     constructor(){
-        this.SERVER_ADDR = "muusealert.herokuapp.com";
-        this.SERVER_URL = "https://" + this.SERVER_ADDR;
+        this.SERVER_ADDR = "localhost:8081";
+        this.SERVER_URL = "http://" + this.SERVER_ADDR;
         this.songs = [];
 
         this.playlistObservable = Observable.create((o) => {
             this.PlaylistObserver = o;
-            let socket = new WebSocket("wss://" + this.SERVER_ADDR);
+            let socket = new WebSocket("ws://" + this.SERVER_ADDR);
 
             // Listen for messages
             socket.onopen = () => console.log("Socket connected");
             socket.onerror = () => console.error("Socket error");
             socket.onclose = () => console.log("Socket closed");
+
+            setInterval(() => {
+                if(socket.readyState === socket.CLOSED) {
+                    socket = new WebSocket("ws://" + this.SERVER_ADDR);
+                } else {
+                    socket.send("ping");
+                } 
+            }, 5000);
 
             socket.onmessage = (ev) => {
                 let newQueue = JSON.parse(ev.data);

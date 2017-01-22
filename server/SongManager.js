@@ -178,14 +178,10 @@ class SongManager {
 
 
     notifyQueueChange(){
-        this.changeListeners.forEach((func, i) => {
-            try {
-                func();
-            } catch (e) {
-                console.error("Change callback failed, removed from callbacks");
-                console.error(e);
-                this.changeListeners.splice(i, 1);
-            }
+        // Remove stale sockets
+        this.changeListeners = this.changeListeners.filter((ws) => ws.readyState === ws.OPEN);
+        this.changeListeners.forEach((ws) => {
+            ws.send(JSON.stringify(sm.getUpcoming(5)));
         });
     }
 }
