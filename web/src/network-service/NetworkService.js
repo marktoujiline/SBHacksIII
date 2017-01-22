@@ -4,13 +4,13 @@ import 'whatwg-fetch';
 export default class NetworkService {
 
     constructor(){
-        this.SERVER_ADDR = "localhost:8081";
-        this.SERVER_URL = "http://" + this.SERVER_ADDR;
+        this.SERVER_ADDR = "muusealert.herokuapp.com";
+        this.SERVER_URL = "https://" + this.SERVER_ADDR;
         this.songs = [];
 
         this.playlistObservable = Observable.create((o) => {
             this.PlaylistObserver = o;
-            let socket = new WebSocket("ws://" + this.SERVER_ADDR);
+            let socket = new WebSocket("wss://" + this.SERVER_ADDR);
 
             // Listen for messages
             socket.onopen = () => console.log("Socket connected");
@@ -58,13 +58,13 @@ export default class NetworkService {
 
     // TODO: vote on server
     vote(song) {
-        let i = this.songs.map(s => s.url).indexOf(song.url);
-        this.songs.splice(i, 1)[0];
-        song.votes++;
-        this.songs.push(song);
-        this.songs = this.songs.slice().sort((a, b) => b.votes-a.votes);
+        // let i = this.songs.map(s => s.url).indexOf(song.url);
+        // this.songs.splice(i, 1)[0];
+        // song.votes++;
+        // this.songs.push(song);
+        // this.songs = this.songs.slice().sort((a, b) => b.votes-a.votes);
         
-        this.PlaylistObserver.next(this.songs);
+        // this.PlaylistObserver.next(this.songs);
     }
 
 
