@@ -47,7 +47,8 @@ class SongManager {
         }
     }
 
-    addToLibrary(song) {
+	addToLibrary(song) {
+		//console.out("Adding to library");
         let j = this.library.map((song) => song.url).indexOf(song.url);
         if (j === -1) {
             this.library.push(song);
@@ -69,7 +70,7 @@ class SongManager {
     addToQueueByName(name, user) {
         return new Promise((resolve, reject) => {
             // Search for the url
-            youtubeSearch.search(name, 1, function(error, result) {
+            youtubeSearch.search(name, 1, (error, result) => {
 				if (error) {
 					console.log(error);
 					reject(error);
@@ -87,8 +88,10 @@ class SongManager {
 						votes: 0,
 						date: new Date
 					};
+					
+					console.log("Creating by name: ");
 
-                    this.addToLibrary(sobj);
+                    ///this.addToLibrary(sobj);
 					this.addToQueue(sobj);
 					resolve(sobj);
 				}
@@ -103,6 +106,7 @@ class SongManager {
     addToQueueByURL(song, user) {
         return this.createSongFromURL(song, user)
                 .then((o) => {
+					//this.addToLibrary(o);
                     this.addToQueue(o);
                     return o;
                 });
