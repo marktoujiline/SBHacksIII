@@ -8,3 +8,4 @@
 - [ ] Front page for website
 - [ ] Share to App
 - [ ] Upload apk somewhere
+- [ ] Consistent youtube adressess
