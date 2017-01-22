@@ -20,6 +20,8 @@ import com.spotify.sdk.android.authentication.AuthenticationClient;
 import com.spotify.sdk.android.authentication.AuthenticationRequest;
 import com.spotify.sdk.android.authentication.AuthenticationResponse;
 
+import org.json.JSONObject;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -47,10 +49,12 @@ public class MainActivity extends AppCompatActivity {
         //Authenticate spotify
         AuthenticationRequest.Builder builder =
                 new AuthenticationRequest.Builder(CLIENT_ID, AuthenticationResponse.Type.TOKEN, REDIRECT_URI);
-        builder.setScopes(new String[]{"streaming"});
+        builder.setScopes(new String[]{"user-top-read"});
         AuthenticationRequest request = builder.build();
         AuthenticationClient.openLoginActivity(this, REQUEST_CODE, request);
         }
+
+
 
         ProgressDialog progress = new ProgressDialog(this);
         progress.setMessage("Downloading Music :) ");
@@ -81,7 +85,8 @@ public class MainActivity extends AppCompatActivity {
         // Check if result comes from the correct activity
         if (requestCode == REQUEST_CODE) {
             AuthenticationResponse response = AuthenticationClient.getResponse(resultCode, intent);
-            response.getAccessToken();
+            String token = response.getAccessToken();
+            Log.i("bucky", token);
             switch (response.getType()) {
                 // Response was successful and contains auth token
                 case TOKEN:
@@ -91,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
                     SharedPreferences.Editor editor = sharedPref.edit();
                     editor.putString("user_token", response.getAccessToken());
                     editor.commit();
+
                     break;
 
                 // Auth flow returned an error
