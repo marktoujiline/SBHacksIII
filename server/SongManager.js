@@ -177,7 +177,6 @@ class SongManager {
 
 
     notifyQueueChange(){
-        console.log("called change listeners");
         this.changeListeners.forEach((func, i) => {
             try {
                 func();

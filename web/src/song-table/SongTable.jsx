@@ -58,9 +58,7 @@ export default class SongTable extends Component {
                 >
                 <div className="song-row--votes">{song.votes}</div>
                 <div className="song-row--name">{song.title + " - " + song.user}</div>
-                <div className="song-row--vote song-row--vote-up">
-                    <i className="material-icons">keyboard_arrow_up</i>
-                </div>
+                
             </div>
             );
     }

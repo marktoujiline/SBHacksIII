@@ -21,15 +21,6 @@ export default class NetworkService {
                 this.songs = newQueue;
                 o.next(this.songs);                
             };
-
-            // fetch(this.SERVER_URL + "/getUpcoming")
-            //     .then(res =>{
-            //         return res.json();
-            //     })
-            //     .then(songs => {
-            //         this.songs = songs || [];
-            //         o.next(this.songs);
-            //     })
         });
     }
 
