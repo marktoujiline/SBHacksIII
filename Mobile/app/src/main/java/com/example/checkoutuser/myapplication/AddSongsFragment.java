@@ -1,11 +1,16 @@
 package com.example.checkoutuser.myapplication;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -34,6 +39,7 @@ public class AddSongsFragment extends Fragment implements View.OnClickListener{
     public static Fragment newInstance()
     {
         AddSongsFragment myFragment = new AddSongsFragment();
+        myFragment.setRetainInstance(true);
         return myFragment;
     }
 
@@ -41,41 +47,47 @@ public class AddSongsFragment extends Fragment implements View.OnClickListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
         // Inflate the layout for this fragment
-        Log.i(TAG, "Hello");
         View view = inflater.inflate(R.layout.fragment_add_song, container, false);
+
+
         final Button btn = (Button) view.findViewById(R.id.addSong);
         btn.setOnClickListener(this);
-        Log.i(TAG, "HI");
 
-// Instantiate the RequestQueue.
         return view;
     }
+
     public void onClick(final View v) {
         switch (v.getId()) {
             case R.id.addSong:
                 try {
+                    v.findViewById(R.id.addSong).setEnabled(false);
+                    v.findViewById(R.id.addSong).postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            v.findViewById(R.id.addSong).setEnabled(true);
+                        }
+                    }, 10000);
+                    SharedPreferences sp = getActivity().getPreferences(Context.MODE_PRIVATE);
                     RequestQueue queue = Volley.newRequestQueue(getActivity());
                     String url = "http://sample-env.45vkx9bmj8.us-west-2.elasticbeanstalk.com/";
-                    //String url = "https://google.com";
-                    JSONObject jsonBody = new JSONObject();
-                    Log.i("bucky", "edit");
-                    EditText edit = (EditText) this.getActivity().findViewById(R.id.editText);
-                    Log.i("bucky", "edittt");
-                    String result = edit.getText().toString();
-                    Log.i("bucky", result);
-                    jsonBody.put("url", result);
-                    jsonBody.put("user", "Mark");
-                    final String requestBody = jsonBody.toString();
 
-// Request a string response from the provided URL.
-                    Log.i("bucky", "1");
-                    StringRequest stringRequest = new StringRequest(Request.Method.POST, url + "addSong",
+                    JSONObject json = new JSONObject();
+
+                    //Song Name
+                    EditText edit = (EditText) this.getActivity().findViewById(R.id.editText);
+                    String songName = edit.getText().toString();
+                    json.put("url", songName);
+
+                    //User Name
+                    Log.i("bucky", sp.getAll().toString());
+                    json.put("user", sp.getString("user_token", "Mark"));
+                    final String requestBody = json.toString();
+
+                    StringRequest stringRequest = new StringRequest(Request.Method.POST, url + "addSongByUrl",
                             new Response.Listener<String>() {
                                 @Override
                                 public void onResponse(String response) {
                                     Log.i("bucky", response.toString());
-                                    // Display the first 500 characters of the response string.
-                                    //btn.setText("Response is: " + response.toString());//+ response.substring(0,500));
                                 }
                             },
                             new Response.ErrorListener() {
@@ -92,16 +104,12 @@ public class AddSongsFragment extends Fragment implements View.OnClickListener{
                         @Override
                         public byte[] getBody()  throws AuthFailureError{
                             try {
-                                Log.i("bucky", requestBody.toString());
-                                Log.i("bucky", "3");
                                 return requestBody == null ? null : requestBody.getBytes("utf-8");
                             } catch (UnsupportedEncodingException uee) {
-                                Log.i("bucky", "Unsupported Encoding while trying to get the bytes of %s using %s");
                                 return null;
                             }
                         }
                     };
-// Add the request to the RequestQueue.
                     queue.add(stringRequest);
                 }
                 catch (JSONException j){
