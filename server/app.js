@@ -26,15 +26,6 @@ let library = [];
 //TODO Remove from playlist when adding to queue (dont just add without check)
 
 /**
- *	Fills p, with songs from l until p.size = n
- */
-let fillPlaylist = function(p, l, n){
-	while(p.length < n && p.length < l.length){
-		p.push(l[Math.floor(Math.random() * l.length)]);
-	}
-}
-
-/**
  *	Sorts playlist by votes then date
  */
 let sortPlaylist = function(p){
