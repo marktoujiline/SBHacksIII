@@ -62,6 +62,10 @@ app.ws('/', function(ws, req) {
 	});
 });
 
+app.get('/callBack', function(req, res){
+	res.send("This is crazy, so call me maybe!");
+});
+
 app.listen( process.env.PORT || 8081, function() {
 	console.log('Listening on port 8081');
 	hardcodeSongs();
