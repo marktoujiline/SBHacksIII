@@ -2,6 +2,9 @@
   "name": "sbhacks3",
   "version": "1.0.0",
   "description": "The best music service. ever.",
+  "engines": {
+    "node": "6.9.1"
+  },
   "main": "app.js",
   "dependencies": {
     "body-parser": "^1.16.0",
