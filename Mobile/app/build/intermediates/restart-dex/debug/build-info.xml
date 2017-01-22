@@ -5,29 +5,29 @@
     density="xxxhdpi"
     format="8"
     plugin-version="2.2.3"
-    timestamp="102098323957882"
-    token="-7099976063149356813"
+    timestamp="104171069435082"
+    token="-3868676429207058113"
     verifier="FULL_BUILD_REQUESTED" >
 
     <task
         name="javac"
-        duration="260" />
+        duration="313" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="72" />
+        duration="177" />
     <task
         name="verifier"
-        duration="6" />
+        duration="31" />
 
     <artifact
         location="/Users/checkoutuser/Workspace/server/SBHacksIII/Mobile/app/build/outputs/apk/app-debug.apk"
         type="MAIN" />
 
     <build
-        timestamp="102098323957882"
+        timestamp="104171069435082"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
             location="/Users/checkoutuser/Workspace/server/SBHacksIII/Mobile/app/build/outputs/apk/app-debug.apk"
