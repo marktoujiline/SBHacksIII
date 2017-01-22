@@ -10,7 +10,7 @@ export default class NetworkService {
 
         this.playlistObservable = Observable.create((o) => {
             this.PlaylistObserver = o;
-            let socket = new WebSocket("ws://" + this.SERVER_ADDR);
+            let socket = new WebSocket("wss://" + this.SERVER_ADDR);
 
             // Listen for messages
             socket.onopen = () => console.log("Socket connected");
