@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -33,95 +34,80 @@ import java.util.Map;
 
 
 public class AddSongsFragment extends Fragment implements View.OnClickListener{
-    String topTracks = "";
     private static final String TAG = "bucky";
     String url = "https://muusealert.herokuapp.com/";
-    public AddSongsFragment() {
-        // Required empty public constructor
-    }
+    String spotify = "https://api.spotify.com/";
+    String topTracks = "";
 
-    public static Fragment newInstance()
-    {
-        AddSongsFragment myFragment = new AddSongsFragment();
-        myFragment.setRetainInstance(true);
-        return myFragment;
-    }
+    public static Fragment newInstance() { return new AddSongsFragment(); }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState){
-
-
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_add_song, container, false);
-
-        final Button btn = (Button) view.findViewById(R.id.addSong);
-        btn.setOnClickListener(this);
-
-        RequestQueue queue = Volley.newRequestQueue(getActivity());
-
-
-        SharedPreferences sp = getActivity().getPreferences(Context.MODE_PRIVATE);
-
-        //get toptracks
+                             Bundle savedInstanceState) {
 
         final Map<String, String> mHeaders = new ArrayMap<String, String>();
+        View view = inflater.inflate(R.layout.fragment_add_song, container, false);
+        RequestQueue queue = Volley.newRequestQueue(getActivity());
+        ((Button) view.findViewById(R.id.addSong)).setOnClickListener(this);
+
+        SharedPreferences sp = getActivity().getPreferences(Context.MODE_PRIVATE);
         mHeaders.put("Authorization", "Bearer " + sp.getString("user_token", "mark"));
+        try {
+            StringRequest stringRequest = new StringRequest(Request.Method.GET, spotify + "v1/me/top/tracks",
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            topTracks = response.toString();
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, "https://api.spotify.com/v1/me/top/tracks",
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        topTracks = response.toString();
-
-                        //Send tracks to server
-                        RequestQueue queue = Volley.newRequestQueue(getActivity());
-                        StringRequest stringRequest = new StringRequest(Request.Method.POST, url + "addPlaylist",
-                                new Response.Listener<String>() {
-                                    @Override
-                                    public void onResponse(String response) {
-                                        topTracks = response.toString();
-                                        //topTracks = response;
-                                    }
-                                },
-                                new Response.ErrorListener() {
-                                    @Override
-                                    public void onErrorResponse(VolleyError error) {
-                                        Log.i("bucky", error.toString());
-                                    }
-                                }) {
-                            @Override
-                            public String getBodyContentType() {
-                                return "application/json; charset=utf-8";
-                            }
-
-                            @Override
-                            public byte[] getBody()  throws AuthFailureError{
-                                try {
-                                    Log.i("bucky", topTracks);
-                                    return topTracks == null ? null : topTracks.getBytes("utf-8");
-                                } catch (UnsupportedEncodingException uee) {
-                                    Log.i("bucky", "bad error");
-                                    return null;
+                            //Send tracks to server
+                            RequestQueue queue = Volley.newRequestQueue(getActivity());
+                            StringRequest stringRequest = new StringRequest(Request.Method.POST, url + "addPlaylist",
+                                    new Response.Listener<String>() {
+                                        @Override
+                                        public void onResponse(String response) {
+                                            topTracks = response.toString();
+                                            //topTracks = response;
+                                        }
+                                    },
+                                    new Response.ErrorListener() {
+                                        @Override
+                                        public void onErrorResponse(VolleyError error) {
+                                            Log.i(TAG, error.toString());
+                                        }
+                                    }) {
+                                @Override
+                                public String getBodyContentType() {
+                                    return "application/json; charset=utf-8";
                                 }
-                            }
-                        };
-                        queue.add(stringRequest);
-                        //topTracks = response;
 
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.i("bucky", error.toString());
-                    }
-                }) {
-            public Map<String, String> getHeaders() {
-                return mHeaders;
-            }
-        };
-        queue.add(stringRequest);
+                                @Override
+                                public byte[] getBody() throws AuthFailureError {
+                                    try {
+                                        return topTracks == null ? null : topTracks.getBytes("utf-8");
+                                    } catch (UnsupportedEncodingException uee) {
+                                        Log.i(TAG, "Request body failed " + uee.toString());
+                                        return null;
+                                    }
+                                }
+                            };
+                            queue.add(stringRequest);
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.i("bucky", error.toString());
+                        }
+                    }) {
+                public Map<String, String> getHeaders() {
+                    return mHeaders;
+                }
+            };
+            queue.add(stringRequest);
+            return view;
+        } catch (Exception e) {
+            Log.i(TAG, "Network error occurred " + e.toString());
+        }
         return view;
     }
 

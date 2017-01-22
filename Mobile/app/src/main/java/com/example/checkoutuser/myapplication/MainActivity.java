@@ -26,87 +26,79 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String TAG = "bucky";
-    // TODO: Replace with your client ID
+
+    private static final String TAG = "muusic";
     private static final String CLIENT_ID = "be98b68099c643d59f9105eaf96cb6ed";
-    // TODO: Replace with your redirect URI
     private static final int REQUEST_CODE = 1337;
-
-
     private static final String REDIRECT_URI = "http://sample-env.45vkx9bmj8.us-west-2.elasticbeanstalk.com";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        //Inflate layout
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
-            // Do your oncreate stuff because there is no bundle
-
-
-        //Authenticate spotify
-        AuthenticationRequest.Builder builder =
-                new AuthenticationRequest.Builder(CLIENT_ID, AuthenticationResponse.Type.TOKEN, REDIRECT_URI);
-        builder.setScopes(new String[]{"user-top-read"});
-        AuthenticationRequest request = builder.build();
-        AuthenticationClient.openLoginActivity(this, REQUEST_CODE, request);
+            //Authenticate spotify
+            try {
+                AuthenticationRequest.Builder builder =
+                        new AuthenticationRequest.Builder(CLIENT_ID, AuthenticationResponse.Type.TOKEN, REDIRECT_URI);
+                builder.setScopes(new String[]{"user-top-read"});
+                AuthenticationRequest request = builder.build();
+                AuthenticationClient.openLoginActivity(this, REQUEST_CODE, request);
+            } catch(Exception e) {
+                Log.i(TAG, "Spotify authentication issue " + e.toString());
+            }
         }
-
-
-
-        ProgressDialog progress = new ProgressDialog(this);
-        progress.setMessage("Downloading Music :) ");
-        progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        progress.setIndeterminate(true);
-
+        //Fake progress bar
+        try {
+            ProgressDialog progress = new ProgressDialog(this);
+            progress.setMessage("Downloading Music :) ");
+            progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            progress.setIndeterminate(true);
+        } catch (Exception e) {
+            Log.i(TAG, "Fake progress bar failing " + e.toString());
+        }
         //Set up fragment container
-
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.flFragmentPlaceHolder, WelcomeFragment.newInstance()).commit();
-
+        try {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.flFragmentPlaceHolder, WelcomeFragment.newInstance()).commit();
+        } catch (Exception e){
+            Log.i(TAG, "fragment replacement failed " + e.toString());
+        }
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
                 transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
                 transaction.replace(R.id.flFragmentPlaceHolder, AddSongsFragment.newInstance()).commit();
             }
-        }, 5000);
-
+        }, 4000);
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
-
         // Check if result comes from the correct activity
         if (requestCode == REQUEST_CODE) {
             AuthenticationResponse response = AuthenticationClient.getResponse(resultCode, intent);
-            String token = response.getAccessToken();
-            Log.i("bucky", token);
             switch (response.getType()) {
                 // Response was successful and contains auth token
                 case TOKEN:
-                    // Handle successful response
-                    //Add user to sp
-                    SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPref.edit();
+                    SharedPreferences sp = getPreferences(Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sp.edit();
                     editor.putString("user_token", response.getAccessToken());
                     editor.commit();
-
                     break;
-
                 // Auth flow returned an error
                 case ERROR:
-                    Log.i("bucky", "onActivityResult error occurred");
+                    Log.i(TAG, "onActivityResult error occurred");
                     break;
             }
+        } else {
+            Log.i(TAG, "Request code != REQUEST_CODE");
         }
     }
 
+    //For EditText to get out of focus when clicked elsewhere
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
