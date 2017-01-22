@@ -69,7 +69,7 @@ public class AddSongsFragment extends Fragment implements View.OnClickListener{
                     }, 10000);
                     SharedPreferences sp = getActivity().getPreferences(Context.MODE_PRIVATE);
                     RequestQueue queue = Volley.newRequestQueue(getActivity());
-                    String url = "http://sample-env.45vkx9bmj8.us-west-2.elasticbeanstalk.com/";
+                    String url = "https://muusealert.herokuapp.com/";
 
                     JSONObject json = new JSONObject();
 
