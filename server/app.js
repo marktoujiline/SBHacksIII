@@ -1,15 +1,8 @@
 let express = require('express')
 let bodyParser = require('body-parser')
 let SongManager = require('./SongManager');
-// Search youtube
-// 		get song title from url
-let youtubeParser = require('youtube-parser');
-let YoutubeSearch = require('youtube-node');
-let validUrl = require('valid-url');
-//		get song url from name
-let youtubeSearch = new YoutubeSearch();
-youtubeSearch.setKey('AIzaSyCHJm6PCl0UTLx_dVTxb3CHP3i2GJf7AYY');
-youtubeSearch.addParam('order', 'relevance');
+let SocketServer = require('ws').Server;
+
 
 // Express stuff
 let cors = require('cors');
@@ -78,8 +71,22 @@ app.listen(8081, function() {
 	console.log('Listening on port 3081');
 	hardcodeSongs();
 
-})
+});
 
+// Setup the socket
+const wss = new SocketServer({ server: app });
+
+wss.on('connection', function connection(ws) {
+  const location = url.parse(ws.upgradeReq.url, true);
+  // You might use location.query.access_token to authenticate or share sessions
+  // or ws.upgradeReq.headers.cookie (see http://stackoverflow.com/a/16395220/151312)
+
+	ws.on('message', function incoming(message) {
+		console.log('received: %s', message);
+	});
+
+	ws.send(JSON.stringify({message: "connected"}));
+});
 
 
 let hardcodeSongs = function(){

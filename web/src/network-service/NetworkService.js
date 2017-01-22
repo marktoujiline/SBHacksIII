@@ -4,11 +4,21 @@ import 'whatwg-fetch';
 export default class NetworkService {
 
     constructor(){
-        this.SERVER_URL = "http://localhost:8081";
+        this.SERVER_ADDR = "localhost:8081";
+        this.SERVER_URL = "http://" + this.SERVER_ADDR;
         this.songs = [];
 
         this.playlistObservable = Observable.create((o) => {
             this.PlaylistObserver = o;
+            let socket = new WebSocket("wss://" + this.SERVER_ADDR);
+
+            socket.onmessage(ev => {
+                console.log(ev);
+                let newQueue = JSON.parse(ev.data);
+                console.log(newQueue);
+                // this.songs = newQueue;
+                // o.next(this.songs);                
+            });
 
             fetch(this.SERVER_URL + "/getUpcomingSongs")
                 .then(res =>{
