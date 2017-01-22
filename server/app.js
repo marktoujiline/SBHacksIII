@@ -83,14 +83,16 @@ app.listen(8081, function() {
 
 
 let hardcodeSongs = function(){
-	Promise.all(
-		sm.addToQueueByURL("https://www.youtube.com/watch?v=f8E07NEZMAs", "Admin"),
-		sm.addToQueueByURL("https://www.youtube.com/watch?v=-zHVW7Zy_vg", "Admin"),
-		sm.addToQueueByURL("https://www.youtube.com/watch?v=1Ga5o7JJquQ", "Admin"),
-		sm.addToQueueByURL("https://www.youtube.com/watch?v=sWj2KV2jEPc", "Admin"),
-		sm.addToQueueByURL("https://www.youtube.com/watch?v=Fz8h_q4qvNk", "Admin"))
-		.then((r) => {
-			// console.log(r);
-		})
-		console.log("lol")
+	a = [];	
+	a.push(sm.createSongFromURL("https://www.youtube.com/watch?v=f8E07NEZMAs", "Admin"))
+	a.push(sm.createSongFromURL("https://www.youtube.com/watch?v=-zHVW7Zy_vg", "Admin"))
+	a.push(sm.createSongFromURL("https://www.youtube.com/watch?v=1Ga5o7JJquQ", "Admin"))
+	a.push(sm.createSongFromURL("https://www.youtube.com/watch?v=sWj2KV2jEPc", "Admin"))
+	a.push(sm.createSongFromURL("https://www.youtube.com/watch?v=Fz8h_q4qvNk", "Admin"))
+
+	a.forEach((p) => {
+		p.then((s) => { 
+			sm.addToLibrary(s);
+		});
+	});
 }

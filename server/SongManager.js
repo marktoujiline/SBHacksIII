@@ -18,6 +18,7 @@ class SongManager {
     }
 
     addToQueue(song) {
+        
         let i = this.queue.map((song) => song.url).indexOf(song.title);
         if (i === -1) {
             // not in array
@@ -97,10 +98,17 @@ class SongManager {
      * Returns a prommise resolving to the added song
      */
     addToQueueByURL(song, user) {
+        return this.createSongFromURL(song, user)
+                .then((o) => {
+                    this.addToQueue(o);
+                    return o;
+                });
+    }
+
+    createSongFromURL(song, user) {
         return new Promise((resolve, reject) => {
             let i = this.library.map((song) => song.url).indexOf(song)
             if(i !== -1){
-                this.addToQueue(this.library[i]);
                 resolve(this.library[i]);
             } else {
                 youtubeParser.getMetadata(song).then(
@@ -111,9 +119,7 @@ class SongManager {
                                 user: user,
                                 votes: 1,
                                 date: new Date
-                            };
-                        this.addToQueue(o);
-                        
+                            };                        
                         resolve(o);
                 }).catch(err => console.log(err));
             }
