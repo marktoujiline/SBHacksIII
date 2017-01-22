@@ -10,7 +10,7 @@ export default class NetworkService {
         this.playlistObservable = Observable.create((o) => {
             this.PlaylistObserver = o;
 
-            fetch(this.SERVER_URL + "/getUpcomingSongs")
+            fetch(this.SERVER_URL + "/getUpcoming")
                 .then(res =>{
                     return res.json();
                 })
@@ -22,11 +22,11 @@ export default class NetworkService {
     }
 
     getNextSong(){
-        return fetch(this.SERVER_URL + '/popNextSong')
+        return fetch(this.SERVER_URL + '/getNext')
             .then((response) => {
 
                 // Update the playlist
-                fetch(this.SERVER_URL + "/getUpcomingSongs")
+                fetch(this.SERVER_URL + "/getUpcoming")
                     .then(res =>{
                         return res.json();
                     })
