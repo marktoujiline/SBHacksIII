@@ -1,7 +1,0 @@
-#Sun Jan 22 04:21:29 PST 2017
-base.0=/Users/checkoutuser/Workspace/server/SBHacksIII/Mobile/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_2cf4a0889d84a6f9bf880f534dfa0fe526abd4a0
-renamed.1=classes2.dex
-renamed.0=classes.dex
-file.1=/Users/checkoutuser/Workspace/server/SBHacksIII/Mobile/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_a63e89a99ee1e966fc0ab46d47517d25f51e5037/classes.dex
-base.1=/Users/checkoutuser/Workspace/server/SBHacksIII/Mobile/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_a63e89a99ee1e966fc0ab46d47517d25f51e5037
-file.0=/Users/checkoutuser/Workspace/server/SBHacksIII/Mobile/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_2cf4a0889d84a6f9bf880f534dfa0fe526abd4a0/classes.dex
