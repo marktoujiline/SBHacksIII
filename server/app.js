@@ -6,10 +6,6 @@ let SongManager = require('./SongManager');
 let youtubeParser = require('youtube-parser');
 let YoutubeSearch = require('youtube-node');
 let validUrl = require('valid-url');
-//		get song url from name
-let youtubeSearch = new YoutubeSearch();
-youtubeSearch.setKey('AIzaSyCHJm6PCl0UTLx_dVTxb3CHP3i2GJf7AYY');
-youtubeSearch.addParam('order', 'relevance');
 
 // Express stuff
 let cors = require('cors');
@@ -17,47 +13,34 @@ let app = express()
 app.use(bodyParser.json())
 app.use(cors())
 
-let playlistLength = 5;
-
-let queue = [];
-let playlist = [];
-let library = [];
-
 sm = SongManager();
 
-app.get('/popNextSong', function (req, res) {
-	res.send(JSON.stringify(popNextSong(queue, playlist)))
+app.get('/getNext', function (req, res) {
+	res.send(JSON.stringify(sm.getNext()));
 })
 
-app.get('/getQueue', function (req, res) {
-	//TODO set number of elements
-	res.send(queue)
-})
-
-app.get('/getUpcomingSongs', function (req, res) {
+app.get('/getUpcoming', function (req, res) {
 	let n = 5;
-	sortPlaylist(queue);
 	//TODO set number of elements
-	res.send(getUpcomingSongs(queue,playlist,n));
-	//res.send(playlist);
+	res.send(sm.getUpcoming(n));
 })
 
 // TODO: change, shouldn't be url if it is a name
-app.post('/addSong', function(req, res){
+app.post('/addSongByUrl', function(req, res){
 	// TODO: make better
 	// Test if a url
 	if((validUrl.isUri(req.body.url))) {
 		console.log("here");
 		if((req.body.url.includes('youtu.be/') || 
 			req.body.url.includes('youtube.com/'))) {
-				addSongByUrl(req.body, queue , 1);
+				sm.addToQueueByURL(req.body.url, req.body.user);
 				res.status(200).send("added");
 		} else {
 			res.status(400).send("Not a valid url");
 		}
 	}
 	else {
-		addSongByName({title: req.body.url}, queue, 1).then(
+		sm.addToQueueByURL(req.body.url, req.body.user).then(
 			(result) => {
 				console.log(result);
 				res.status(200).send(result);
@@ -71,11 +54,8 @@ app.post('/addSong', function(req, res){
 	}
 })
 
-
-
-
 app.listen(8081, function() {
-	console.log('Listening on port 3081');
+	console.log('Listening on port 8081');
 	hardcodeSongs();
 
 })
@@ -93,6 +73,7 @@ let hardcodeSongs = function(){
 	a.forEach((p) => {
 		p.then((s) => { 
 			sm.addToLibrary(s);
+			sm.fillPlaylist(5);
 		});
 	});
 }

@@ -19,9 +19,11 @@ class SongManager {
 
     addToQueue(song) {
         
-        let i = this.queue.map((song) => song.url).indexOf(song.title);
+        let i = this.queue.map((song) => song.url).indexOf(song.url);
         if (i === -1) {
             // not in array
+			song.votes = 1;
+			song.date = new Date();
             this.queue.push(song);
             i = this.playlist.map((song) => song.url).indexOf(song.title);
             if (i !== -1) {
@@ -32,14 +34,15 @@ class SongManager {
             // in array, increment 
             this.queue[i].votes++;
         }
-        
+	   	this.sortQueue()
         this.notifyQueueChange();        
     }
 
     addToPlaylist(song) {
         let i = this.queue.map((song) => song.url).indexOf(song.title);
         let j = this.playlist.map((song) => song.url).indexOf(song.title);        
-        if ( i !== -1 && j !== -1) {
+        if ( i == -1 && j == -1) {
+			song.votes = 0;
             this.playlist.push(song);
         }
     }
@@ -81,7 +84,7 @@ class SongManager {
 						title: result.items[0].snippet.title,
 						url: "https://youtu.be/" + result.items[0].id.videoId,
 						user: user,
-						votes: 1,
+						votes: 0,
 						date: new Date
 					};
 
@@ -117,7 +120,7 @@ class SongManager {
                                 title: metadata.title,
                                 url: song,
                                 user: user,
-                                votes: 1,
+                                votes: 0,
                                 date: new Date
                             };                        
                         resolve(o);
@@ -140,7 +143,11 @@ class SongManager {
      * Returns and removes top of the queue
      */
     getNext() {
-        if(this.queue.length > 0) {
+        this.fillPlaylist(6);
+		console.log("Get nexxt queue: " + this.queue.length);
+		console.log("Get nexxt playlist: " + this.playlist.length);
+		console.log("Get nexxt library: " + this.library.length);
+		if(this.queue.length > 0) {
             return this.queue.shift();
         } else {
             return this.playlist.shift();
@@ -148,7 +155,7 @@ class SongManager {
     }
 
     getUpcoming(amount) {
-        r = [];
+        let r = [];
         for(let i = 0; i < Math.min(amount, this.queue.length + this.playlist.length); i++) {
             if(this.queue.length > i) {
                 r.push(this.queue[i]);
