@@ -42,11 +42,6 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-
-        <div className="App-header">
-          <h1>Muuse Alarm</h1>
-        </div>
-
         <div className="main-player" >
             <div className="controls">
               <i className="material-icons icon-hidden" onClick={() => this.skipSong()}>skip_previous</i>
@@ -58,13 +53,18 @@ class App extends Component {
               }                    
               <i className="material-icons" onClick={() => this.skipSong()}>skip_next</i>
             </div>
-
-          <ReactPlayer
-              url={this.state.currentSong.url} 
-              width={this.pageWith / 2 } 
-              height={(this.pageWith / 25) * 9}
-              onEnded={() => this.netService.getNextSong()}
-              playing={this.state.playSong}/>
+            <div className="video-background">
+              <div className="video-foreground">
+              <ReactPlayer
+                  className="react-player"
+                  url={this.state.currentSong.url} 
+                  width="100%" 
+                  height="100%"
+                  onEnded={() => this.netService.getNextSong()}
+                  playing={this.state.playSong}/>
+              </div>
+            </div>
+        
               
               <SongTable className="song-table"
                          style={{height: this.pageWith /25 * 9}} 
@@ -79,7 +79,10 @@ class App extends Component {
   }
 
   toggleSongPlayback() {
-    if (this.state.currentSong.url === '') return;
+    if (this.state.currentSong.url === '') {
+      this.skipSong();
+      return;
+    }
     this.setState((prev) => {
       return {playSong: !prev.playSong}
     });
