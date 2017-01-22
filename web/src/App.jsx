@@ -44,7 +44,7 @@ class App extends Component {
       <div className="App">
 
         <div className="App-header">
-          <h1>Muuse Player</h1>
+          <h1>Muuse Alarm</h1>
         </div>
 
         <div className="main-player" >

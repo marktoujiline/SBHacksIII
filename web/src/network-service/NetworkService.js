@@ -4,7 +4,7 @@ import 'whatwg-fetch';
 export default class NetworkService {
 
     constructor(){
-        this.SERVER_URL = "http://localhost:3001";
+        this.SERVER_URL = "http://localhost:8081";
         this.songs = [];
 
         this.playlistObservable = Observable.create((o) => {
