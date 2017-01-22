@@ -72,6 +72,12 @@ app.listen( process.env.PORT || 8081, function() {
 
 });
 
+app.get('/addPlaylist', function(req, res){
+	let playlist = req.body;
+	console.log(playlist);
+
+	res.status(200).send("Playlist received");	
+});
 
 let hardcodeSongs = function(){
 	a = [];	
