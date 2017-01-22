@@ -4,13 +4,13 @@ import 'whatwg-fetch';
 export default class NetworkService {
 
     constructor(){
-        this.SERVER_ADDR = "sample-env.45vkx9bmj8.us-west-2.elasticbeanstalk.com";
-        this.SERVER_URL = "http://" + this.SERVER_ADDR;
+        this.SERVER_ADDR = "muusealert.herokuapp.com";
+        this.SERVER_URL = "https://" + this.SERVER_ADDR;
         this.songs = [];
 
         this.playlistObservable = Observable.create((o) => {
             this.PlaylistObserver = o;
-            let socket = new WebSocket("ws://" + this.SERVER_ADDR);
+            let socket = new WebSocket("wss://" + this.SERVER_ADDR);
 
             // Listen for messages
             socket.onopen = () => console.log("Socket connected");
