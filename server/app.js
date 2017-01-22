@@ -1,69 +1,54 @@
 let express = require('express')
 let bodyParser = require('body-parser')
 let SongManager = require('./SongManager');
-// Search youtube
-// 		get song title from url
-let youtubeParser = require('youtube-parser');
-let YoutubeSearch = require('youtube-node');
+let SocketServer = require('ws').Server;
 let validUrl = require('valid-url');
-//		get song url from name
-let youtubeSearch = new YoutubeSearch();
-youtubeSearch.setKey('AIzaSyCHJm6PCl0UTLx_dVTxb3CHP3i2GJf7AYY');
-youtubeSearch.addParam('order', 'relevance');
 
 // Express stuff
 let cors = require('cors');
 let app = express() 
+var expressWs = require('express-ws')(app);
+
+app.use(express.static('public'))
 app.use(bodyParser.json())
 app.use(cors())
 
-let playlistLength = 5;
-
-let queue = [];
-let playlist = [];
-let library = [];
-
 sm = SongManager();
 
-app.get('/popNextSong', function (req, res) {
-	res.send(JSON.stringify(popNextSong(queue, playlist)))
+app.get('/getNext', function (req, res) {
+	res.send(JSON.stringify(sm.getNext()));
 })
 
-app.get('/getQueue', function (req, res) {
-	//TODO set number of elements
-	res.send(queue)
-})
-
-app.get('/getUpcomingSongs', function (req, res) {
+app.get('/getUpcoming', function (req, res) {
 	let n = 5;
-	sortPlaylist(queue);
 	//TODO set number of elements
-	res.send(getUpcomingSongs(queue,playlist,n));
-	//res.send(playlist);
+	res.send(sm.getUpcoming(n));
 })
+
+app.post('/addToLibrary', function(req, res) {
+
+});
 
 // TODO: change, shouldn't be url if it is a name
-app.post('/addSong', function(req, res){
+app.post('/addSongByUrl', function(req, res){
 	// TODO: make better
 	// Test if a url
 	if((validUrl.isUri(req.body.url))) {
-		console.log("here");
-		if((req.body.url.includes('youtu.be/') || 
+		if((req.body.url.includes('youtu.be/') || //TODO normilize address 
 			req.body.url.includes('youtube.com/'))) {
-				addSongByUrl(req.body, queue , 1);
+				sm.addToQueueByURL(req.body.url, req.body.user);
 				res.status(200).send("added");
 		} else {
 			res.status(400).send("Not a valid url");
 		}
 	}
 	else {
-		addSongByName({title: req.body.url}, queue, 1).then(
+		sm.addToQueueByName(req.body.url, req.body.user).then(
 			(result) => {
 				console.log(result);
 				res.status(200).send(result);
 			},
 			(err) => {
-				console.log("here")
 				console.log(err)
 				
 				res.status(500).send(err)
@@ -71,26 +56,35 @@ app.post('/addSong', function(req, res){
 	}
 })
 
+app.ws('/', function(ws, req) {
+  
+	// Register for updates
+	ws.send(JSON.stringify(sm.getUpcoming(5)))
 
-
+	sm.setChangeCallback(() => {
+		ws.send(JSON.stringify(sm.getUpcoming(5)))
+	});
+});
 
 app.listen(8081, function() {
-	console.log('Listening on port 3081');
+	console.log('Listening on port 8081');
 	hardcodeSongs();
 
-})
-
+});
 
 
 let hardcodeSongs = function(){
-	Promise.all(
-		sm.addToQueueByURL("https://www.youtube.com/watch?v=f8E07NEZMAs", "Admin"),
-		sm.addToQueueByURL("https://www.youtube.com/watch?v=-zHVW7Zy_vg", "Admin"),
-		sm.addToQueueByURL("https://www.youtube.com/watch?v=1Ga5o7JJquQ", "Admin"),
-		sm.addToQueueByURL("https://www.youtube.com/watch?v=sWj2KV2jEPc", "Admin"),
-		sm.addToQueueByURL("https://www.youtube.com/watch?v=Fz8h_q4qvNk", "Admin"))
-		.then((r) => {
-			// console.log(r);
-		})
-		console.log("lol")
+	a = [];	
+	a.push(sm.createSongFromURL("https://www.youtube.com/watch?v=f8E07NEZMAs", "Admin"))
+	a.push(sm.createSongFromURL("https://www.youtube.com/watch?v=-zHVW7Zy_vg", "Admin"))
+	a.push(sm.createSongFromURL("https://www.youtube.com/watch?v=1Ga5o7JJquQ", "Admin"))
+	a.push(sm.createSongFromURL("https://www.youtube.com/watch?v=sWj2KV2jEPc", "Admin"))
+	a.push(sm.createSongFromURL("https://www.youtube.com/watch?v=Fz8h_q4qvNk", "Admin"))
+
+	a.forEach((p) => {
+		p.then((s) => { 
+			sm.addToLibrary(s);
+			sm.fillPlaylist(5);
+		});
+	});
 }

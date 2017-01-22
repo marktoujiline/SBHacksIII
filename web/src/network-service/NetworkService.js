@@ -4,29 +4,32 @@ import 'whatwg-fetch';
 export default class NetworkService {
 
     constructor(){
-        this.SERVER_URL = "http://localhost:8081";
+        this.SERVER_ADDR = "sample-env.45vkx9bmj8.us-west-2.elasticbeanstalk.com";
+        this.SERVER_URL = "http://" + this.SERVER_ADDR;
         this.songs = [];
 
         this.playlistObservable = Observable.create((o) => {
             this.PlaylistObserver = o;
+            let socket = new WebSocket("ws://" + this.SERVER_ADDR);
 
-            fetch(this.SERVER_URL + "/getUpcomingSongs")
-                .then(res =>{
-                    return res.json();
-                })
-                .then(songs => {
-                    this.songs = songs || [];
-                    o.next(this.songs);
-                })
+            // Listen for messages
+            socket.onopen = () => console.log("Socket connected");
+
+            socket.onmessage = (ev) => {
+                let newQueue = JSON.parse(ev.data);
+                console.log(newQueue);
+                this.songs = newQueue;
+                o.next(this.songs);                
+            };
         });
     }
 
     getNextSong(){
-        return fetch(this.SERVER_URL + '/popNextSong')
+        return fetch(this.SERVER_URL + '/getNext')
             .then((response) => {
 
                 // Update the playlist
-                fetch(this.SERVER_URL + "/getUpcomingSongs")
+                fetch(this.SERVER_URL + "/getUpcoming")
                     .then(res =>{
                         return res.json();
                     })

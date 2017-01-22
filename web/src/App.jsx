@@ -11,7 +11,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.netService = new NetworkService();
-    this.pageWith = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+    this.pageWith = Math.min(Math.max(document.documentElement.clientWidth, window.innerWidth || 0), 800);
 
     // Setup initial state
     this.state = {
