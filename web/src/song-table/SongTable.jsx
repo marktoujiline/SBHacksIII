@@ -57,7 +57,7 @@ export default class SongTable extends Component {
                 onClick={() => this.props.voteUpCallback(i)}
                 >
                 <div className="song-row--votes">{song.votes}</div>
-                <div className="song-row--name">{song.title + " - " + song.user}</div>
+                <div className="song-row--name">{song.title}</div>
                 
             </div>
             );

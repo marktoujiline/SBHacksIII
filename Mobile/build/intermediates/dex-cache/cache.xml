@@ -2,256 +2,121 @@
 <items version="2" >
 
     <item
-        is-multidex="true"
-        jar="/Users/checkoutuser/Workspace/server/SBHacksIII/Mobile/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="1630658fbc2d222b988603c27b4a4249586fbfe7">
-        <dex dex="/Users/checkoutuser/Workspace/server/SBHacksIII/Mobile/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-25.1.0_2b36f71c03e9bd47443e7661f3384bb8dc43bf28/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/checkoutuser/Workspace/server/SBHacksIII/Mobile/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/25.1.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="f02263e35e52668dd17b73bf961437e3d562b35f">
-        <dex dex="/Users/checkoutuser/Workspace/server/SBHacksIII/Mobile/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-media-compat-25.1.0_b4ad78e0e5ba70a1e42c0da0a5683629db102946/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/checkoutuser/Workspace/server/SBHacksIII/Mobile/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/25.1.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="0a0ef86b7fa568a52bf6214a0326ca1f1d618da7">
-        <dex dex="/Users/checkoutuser/Workspace/server/SBHacksIII/Mobile/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-utils-25.1.0_e6e30a871a0f35c6cb01602f2970b15152cf1737/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/checkoutuser/Workspace/server/SBHacksIII/Mobile/app/build/intermediates/exploded-aar/com.android.support/support-fragment/25.1.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="2a53c4f3518116b8c6aee0e477233f0f7da8616f">
-        <dex dex="/Users/checkoutuser/Workspace/server/SBHacksIII/Mobile/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-fragment-25.1.0_67fc3af6879a985c6259716a29e1c3974468795d/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/checkoutuser/Workspace/server/SBHacksIII/Mobile/app/build/intermediates/exploded-aar/com.spotify.sdk/spotify-android-auth-1.0.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="0e7c2daeb5c4e8a4b0874bd62367979bb1c0c82a">
-        <dex dex="/Users/checkoutuser/Workspace/server/SBHacksIII/Mobile/app/build/intermediates/transforms/dex/debug/folders/1000/10/exploded-aar-com.spotify.sdk-spotify-android-auth-1.0.0_2880757b16e7716b9012c4bfa55e3d41c2f61a05/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/checkoutuser/AndroidStudioProjects/MyApplication/app/build/intermediates/exploded-aar/com.android.support/support-fragment/25.1.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="2a53c4f3518116b8c6aee0e477233f0f7da8616f">
-        <dex dex="/Users/checkoutuser/AndroidStudioProjects/MyApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-fragment-25.1.0_cfa4d58e565610533f7dba1ff68f0095bf2b8f90/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/checkoutuser/Workspace/server/SBHacksIII/Mobile/app/build/intermediates/exploded-aar/com.android.support/support-v4/25.1.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
-        <dex dex="/Users/checkoutuser/Workspace/server/SBHacksIII/Mobile/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-25.1.0_785589e436e380373fafd9576120dfbdd06fe82a/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/checkoutuser/Workspace/server/SBHacksIII/Mobile/app/build/intermediates/exploded-aar/com.android.support/support-compat/25.1.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="ca3c7aa31e2726a400a6e552b93cb9f63c9a1e6d">
-        <dex dex="/Users/checkoutuser/Workspace/server/SBHacksIII/Mobile/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-compat-25.1.0_d7160f88ae072b01bd1c63c595c98cfdc1a23119/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/checkoutuser/AndroidStudioProjects/MyApplication/app/build/intermediates/exploded-aar/com.android.volley/volley/1.0.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="2cd4b982617e544728de0782d718a58ce1b06e3f">
-        <dex dex="/Users/checkoutuser/AndroidStudioProjects/MyApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.volley-volley-1.0.0_142c892b698b749f35984fd645fed5982aca956e/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/checkoutuser/AndroidStudioProjects/MyApplication/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/25.1.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="aee64634871d88a419d59eb743c1258a60f19700">
-        <dex dex="/Users/checkoutuser/AndroidStudioProjects/MyApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-ui-25.1.0_081c38928cd46c4fb59f5f2f871d83a35894370a/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/checkoutuser/AndroidStudioProjects/MyApplication/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/25.1.0/jars/classes.jar"
-        jumboMode="true"
+        is-multidex="false"
+        jar="/home/jonathan/Documents/SBHacksIII/Mobile/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/25.1.0/jars/classes.jar"
+        jumboMode="false"
         optimize="true"
         revision="25.0.2"
         sha1="6fb6ac3e8d3b9013819920d9ea11f3803c4c0033">
-        <dex dex="/Users/checkoutuser/AndroidStudioProjects/MyApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-25.1.0_8c0544dd882db23cf3fe49ec5506411ae5fb33b0/classes.dex" />
+        <dex dex="/home/jonathan/Documents/SBHacksIII/Mobile/app/build/intermediates/pre-dexed/debug/com.android.support-animated-vector-drawable-25.1.0_3741504263ebda7e8a3e8a2754d0990e2f7439f2.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="/Users/checkoutuser/Workspace/server/SBHacksIII/Mobile/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="68df8944a2cf170af1908fe008d61ef2b9ddf09b">
-        <dex dex="/Users/checkoutuser/Workspace/server/SBHacksIII/Mobile/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_2cf4a0889d84a6f9bf880f534dfa0fe526abd4a0/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/checkoutuser/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/25.1.0/support-annotations-25.1.0.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="64cb6b229a8bdfd907bc8dd46839a0053e4c018d">
-        <dex dex="/Users/checkoutuser/AndroidStudioProjects/MyApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-25.1.0_f2a85f2d2debc441f33f73e038b667f0ed5ca011/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/checkoutuser/AndroidStudioProjects/MyApplication/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/25.1.0/jars/classes.jar"
-        jumboMode="true"
+        is-multidex="false"
+        jar="/home/jonathan/Documents/SBHacksIII/Mobile/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/25.1.0/jars/classes.jar"
+        jumboMode="false"
         optimize="true"
         revision="25.0.2"
         sha1="0a0ef86b7fa568a52bf6214a0326ca1f1d618da7">
-        <dex dex="/Users/checkoutuser/AndroidStudioProjects/MyApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-utils-25.1.0_049b481ba052ca153ec03ec820c3252557ff1916/classes.dex" />
+        <dex dex="/home/jonathan/Documents/SBHacksIII/Mobile/app/build/intermediates/pre-dexed/debug/com.android.support-support-core-utils-25.1.0_151602606e94ba01b9acd7bb93cb706144cffab2.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="/Users/checkoutuser/Workspace/server/SBHacksIII/Mobile/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/25.1.0/jars/classes.jar"
-        jumboMode="true"
+        is-multidex="false"
+        jar="/home/jonathan/Documents/SBHacksIII/Mobile/app/build/intermediates/exploded-aar/com.android.support/support-fragment/25.1.0/jars/classes.jar"
+        jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="e79aa3d9a16f8c9f16377c0608de70a8f31e5d80">
-        <dex dex="/Users/checkoutuser/Workspace/server/SBHacksIII/Mobile/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-25.1.0_1362097d3cc83299ad28895f3cb17ab3235b57ea/classes.dex" />
+        sha1="2a53c4f3518116b8c6aee0e477233f0f7da8616f">
+        <dex dex="/home/jonathan/Documents/SBHacksIII/Mobile/app/build/intermediates/pre-dexed/debug/com.android.support-support-fragment-25.1.0_c96fec45dc2adc0c8d32f95cf7ef9f2b657c37b1.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="/Users/checkoutuser/AndroidStudioProjects/MyApplication/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="3a834552e8c6bfc6e7724a5805b75165bbf1f961">
-        <dex dex="/Users/checkoutuser/AndroidStudioProjects/MyApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_3e391daff10ad1be3a1c29fbe5a0137b38ce8eca/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/checkoutuser/AndroidStudioProjects/MyApplication/app/build/intermediates/exploded-aar/com.android.support/support-compat/25.1.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="ca3c7aa31e2726a400a6e552b93cb9f63c9a1e6d">
-        <dex dex="/Users/checkoutuser/AndroidStudioProjects/MyApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-compat-25.1.0_fbf9900f1cfd329e54ede35ffd666ae220db98e9/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/checkoutuser/AndroidStudioProjects/MyApplication/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="1630658fbc2d222b988603c27b4a4249586fbfe7">
-        <dex dex="/Users/checkoutuser/AndroidStudioProjects/MyApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-25.1.0_08af88dc7bf3cc9b9a97ee6acd4e2c561bedea8f/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/checkoutuser/AndroidStudioProjects/MyApplication/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="55611859abf7d1b4f4304d29e4afcef458532723">
-        <dex dex="/Users/checkoutuser/AndroidStudioProjects/MyApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_5646d0723be3bc716e6ad40923d841661310278f/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/checkoutuser/Workspace/server/SBHacksIII/Mobile/app/build/intermediates/exploded-aar/com.android.volley/volley/1.0.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="2cd4b982617e544728de0782d718a58ce1b06e3f">
-        <dex dex="/Users/checkoutuser/Workspace/server/SBHacksIII/Mobile/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.volley-volley-1.0.0_eeac735c5b67eafbc1638938f9e970709de31eb8/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/checkoutuser/AndroidStudioProjects/MyApplication/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/25.1.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="e79aa3d9a16f8c9f16377c0608de70a8f31e5d80">
-        <dex dex="/Users/checkoutuser/AndroidStudioProjects/MyApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-25.1.0_cfffe4eb5833c6c8d2f3a37246915c55f2cb2526/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/checkoutuser/AndroidStudioProjects/MyApplication/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/25.1.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="f02263e35e52668dd17b73bf961437e3d562b35f">
-        <dex dex="/Users/checkoutuser/AndroidStudioProjects/MyApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-media-compat-25.1.0_784d86cb089e178cc5caae23008a4162a3964b99/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/checkoutuser/AndroidStudioProjects/MyApplication/app/build/intermediates/exploded-aar/com.android.support/support-v4/25.1.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
-        <dex dex="/Users/checkoutuser/AndroidStudioProjects/MyApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-25.1.0_6a1a9703367f81502a7d86113a9067ec213506b3/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/checkoutuser/Workspace/server/SBHacksIII/Mobile/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/25.1.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="aee64634871d88a419d59eb743c1258a60f19700">
-        <dex dex="/Users/checkoutuser/Workspace/server/SBHacksIII/Mobile/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-ui-25.1.0_b419ea64f1fa6223a9bbd6d2eee5d44ae780c3ad/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/checkoutuser/.gradle/caches/modules-2/files-2.1/com.mcxiaoke.volley/library/1.0.19/a8f23f65fc1e522ee4a1a697ee569901a46741fa/library-1.0.19.jar"
-        jumboMode="true"
+        is-multidex="false"
+        jar="/home/jonathan/.gradle/caches/modules-2/files-2.1/com.mcxiaoke.volley/library/1.0.19/a8f23f65fc1e522ee4a1a697ee569901a46741fa/library-1.0.19.jar"
+        jumboMode="false"
         optimize="true"
         revision="25.0.2"
         sha1="a8f23f65fc1e522ee4a1a697ee569901a46741fa">
-        <dex dex="/Users/checkoutuser/AndroidStudioProjects/MyApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/library-1.0.19_82ee6e709413cf6c001533972c27b7d65d57d455/classes.dex" />
+        <dex dex="/home/jonathan/Documents/SBHacksIII/Mobile/app/build/intermediates/pre-dexed/debug/library-1.0.19_f86270b1ce29bf1ed763333f4b1ad4140dc56117.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="/Users/checkoutuser/Workspace/server/SBHacksIII/Mobile/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/25.1.0/jars/classes.jar"
-        jumboMode="true"
+        is-multidex="false"
+        jar="/home/jonathan/Documents/SBHacksIII/Mobile/app/build/intermediates/exploded-aar/com.android.volley/volley/1.0.0/jars/classes.jar"
+        jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="6fb6ac3e8d3b9013819920d9ea11f3803c4c0033">
-        <dex dex="/Users/checkoutuser/Workspace/server/SBHacksIII/Mobile/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-25.1.0_bbf3653160e922cae2963e1c6fb0d0e8b14fc385/classes.dex" />
+        sha1="2cd4b982617e544728de0782d718a58ce1b06e3f">
+        <dex dex="/home/jonathan/Documents/SBHacksIII/Mobile/app/build/intermediates/pre-dexed/debug/com.android.volley-volley-1.0.0_3750ae144472e83f8cc83b1580e69355fb6e56bf.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="/Users/checkoutuser/Workspace/server/SBHacksIII/Mobile/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
-        jumboMode="true"
+        is-multidex="false"
+        jar="/home/jonathan/Documents/SBHacksIII/Mobile/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/25.1.0/jars/classes.jar"
+        jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="375cb4ca9da5db4019ba7b7b4207a2984e871685">
-        <dex dex="/Users/checkoutuser/Workspace/server/SBHacksIII/Mobile/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_a63e89a99ee1e966fc0ab46d47517d25f51e5037/classes.dex" />
+        sha1="aee64634871d88a419d59eb743c1258a60f19700">
+        <dex dex="/home/jonathan/Documents/SBHacksIII/Mobile/app/build/intermediates/pre-dexed/debug/com.android.support-support-core-ui-25.1.0_199d1c76e01d048ceec9710cf7ed79a23ce3c6b2.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="/Users/checkoutuser/AndroidStudioProjects/MyApplication/app/build/intermediates/exploded-aar/com.spotify.sdk/spotify-android-auth-1.0.0/jars/classes.jar"
-        jumboMode="true"
+        is-multidex="false"
+        jar="/home/jonathan/Documents/SBHacksIII/Mobile/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/25.1.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="e79aa3d9a16f8c9f16377c0608de70a8f31e5d80">
+        <dex dex="/home/jonathan/Documents/SBHacksIII/Mobile/app/build/intermediates/pre-dexed/debug/com.android.support-support-vector-drawable-25.1.0_f1d2ce01be419140e8e584b73411b341b005102a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/jonathan/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/25.1.0/support-annotations-25.1.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="64cb6b229a8bdfd907bc8dd46839a0053e4c018d">
+        <dex dex="/home/jonathan/Documents/SBHacksIII/Mobile/app/build/intermediates/pre-dexed/debug/support-annotations-25.1.0_7ed37ac7ff1080110deb8d9554bf503b4a659c23.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/jonathan/Documents/SBHacksIII/Mobile/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/25.1.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="f02263e35e52668dd17b73bf961437e3d562b35f">
+        <dex dex="/home/jonathan/Documents/SBHacksIII/Mobile/app/build/intermediates/pre-dexed/debug/com.android.support-support-media-compat-25.1.0_07bf6121c89ce6ad9948dadb59ff5e3859313b18.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/jonathan/Documents/SBHacksIII/Mobile/app/build/intermediates/exploded-aar/com.android.support/support-compat/25.1.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="ca3c7aa31e2726a400a6e552b93cb9f63c9a1e6d">
+        <dex dex="/home/jonathan/Documents/SBHacksIII/Mobile/app/build/intermediates/pre-dexed/debug/com.android.support-support-compat-25.1.0_69b98c96fb54a78097536fa18866e4f50998936d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/jonathan/Documents/SBHacksIII/Mobile/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="1630658fbc2d222b988603c27b4a4249586fbfe7">
+        <dex dex="/home/jonathan/Documents/SBHacksIII/Mobile/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-25.1.0_7dde7cc57e3351195fb316a75cade17cd93ccde1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/jonathan/Documents/SBHacksIII/Mobile/app/build/intermediates/exploded-aar/com.spotify.sdk/spotify-android-auth-1.0.0/jars/classes.jar"
+        jumboMode="false"
         optimize="true"
         revision="25.0.2"
         sha1="0e7c2daeb5c4e8a4b0874bd62367979bb1c0c82a">
-        <dex dex="/Users/checkoutuser/AndroidStudioProjects/MyApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/exploded-aar-com.spotify.sdk-spotify-android-auth-1.0.0_cbe3a6e70bfab724ce798a400284993e7215be5c/classes.dex" />
+        <dex dex="/home/jonathan/Documents/SBHacksIII/Mobile/app/build/intermediates/pre-dexed/debug/exploded-aar-com.spotify.sdk-spotify-android-auth-1.0.0_2ecf3b473963b4b208a88cd6d7077f92a1952ad0.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/jonathan/Documents/SBHacksIII/Mobile/app/build/intermediates/exploded-aar/com.android.support/support-v4/25.1.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/home/jonathan/Documents/SBHacksIII/Mobile/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-25.1.0_9cde6b1962182e434e300f1aa8e27cbb9f46b79c.jar" />
     </item>
 
 </items>

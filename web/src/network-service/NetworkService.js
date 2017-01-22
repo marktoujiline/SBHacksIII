@@ -14,6 +14,8 @@ export default class NetworkService {
 
             // Listen for messages
             socket.onopen = () => console.log("Socket connected");
+            socket.onerror = () => console.error("Socket error");
+            socket.onclose = () => console.log("Socket closed");
 
             socket.onmessage = (ev) => {
                 let newQueue = JSON.parse(ev.data);
