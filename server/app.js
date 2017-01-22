@@ -71,6 +71,9 @@ app.listen( process.env.PORT || 8081, function() {
 
 app.post('/addPlaylist', function(req, res){
 	p = [];
+	if(req.body.items === undefined) {
+		res.status(400).send("missing items field");
+	}
 	let playlist = req.body.items;
 	for ( let i = 0 ; i < playlist.length ; i++ ){
 		let name = playlist[i].name;
