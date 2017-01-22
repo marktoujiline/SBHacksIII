@@ -63,6 +63,7 @@ class SongManager {
         while(this.playlist.length < size && this.playlist.length < this.library.length){
             this.addToPlaylist(this.library[Math.floor(Math.random() * this.library.length)]);
         }
+        this.notifyQueueChange();
     }
 
     /**

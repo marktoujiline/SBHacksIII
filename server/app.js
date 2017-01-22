@@ -66,15 +66,26 @@ app.get('/callBack', function(req, res){
 
 app.listen( process.env.PORT || 8081, function() {
 	console.log('Listening on port 8081');
-	hardcodeSongs();
-
+	//hardcodeSongs();
 });
 
-app.get('/addPlaylist', function(req, res){
-	let playlist = req.body;
-	console.log(playlist);
+app.post('/addPlaylist', function(req, res){
+	p = [];
+	let playlist = req.body.items;
+	for ( let i = 0 ; i < playlist.length ; i++ ){
+		let name = playlist[i].name;
+		for( let j = 0 ; j < playlist[i].artists.length ; j++){
+			name = name + " " + playlist[i].artists[j].name;
+		}
+		p.push(sm.createSongFromName(name).then( (o) => {
+			sm.addToLibrary(o);		
+		}));
+	}
 
-	res.status(200).send("Playlist received");	
+	Promise.all(p).then(() => sm.fillPlaylist(5))
+		.catch((e) => console.log(e));
+
+	res.status(200).send("Playlist received");
 });
 
 let hardcodeSongs = function(){
