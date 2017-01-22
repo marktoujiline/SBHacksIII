@@ -25,10 +25,6 @@ app.get('/getUpcoming', function (req, res) {
 	res.send(sm.getUpcoming(n));
 })
 
-app.post('/addToLibrary', function(req, res) {
-
-});
-
 // TODO: change, shouldn't be url if it is a name
 app.post('/addSongByUrl', function(req, res){
 	// TODO: make better

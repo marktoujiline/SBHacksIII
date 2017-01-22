@@ -154,6 +154,7 @@ class SongManager {
         } else {
             return this.playlist.shift();
         }
+        this.notifyQueueChange();
     }
 
     getUpcoming(amount) {
@@ -181,7 +182,7 @@ class SongManager {
             try {
                 func();
             } catch (e) {
-                console.log("Change callback failed, removed from callbacks");
+                console.error("Change callback failed, removed from callbacks");
                 this.changeListeners.splice(i, 1);
             }
         });
