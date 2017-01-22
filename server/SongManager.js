@@ -183,6 +183,7 @@ class SongManager {
                 func();
             } catch (e) {
                 console.error("Change callback failed, removed from callbacks");
+                console.error(e);
                 this.changeListeners.splice(i, 1);
             }
         });
