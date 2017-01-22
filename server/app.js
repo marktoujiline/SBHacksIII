@@ -9,6 +9,7 @@ let cors = require('cors');
 let app = express() 
 var expressWs = require('express-ws')(app);
 
+app.use(express.static('public'))
 app.use(bodyParser.json())
 app.use(cors())
 
