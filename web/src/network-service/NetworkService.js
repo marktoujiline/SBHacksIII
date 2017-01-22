@@ -10,24 +10,26 @@ export default class NetworkService {
 
         this.playlistObservable = Observable.create((o) => {
             this.PlaylistObserver = o;
-            let socket = new WebSocket("wss://" + this.SERVER_ADDR);
+            let socket = new WebSocket("ws://" + this.SERVER_ADDR);
 
-            socket.onmessage(ev => {
-                console.log(ev);
+            // Listen for messages
+            socket.onopen = () => console.log("Socket connected");
+
+            socket.onmessage = (ev) => {
                 let newQueue = JSON.parse(ev.data);
                 console.log(newQueue);
-                // this.songs = newQueue;
-                // o.next(this.songs);                
-            });
+                this.songs = newQueue;
+                o.next(this.songs);                
+            };
 
-            fetch(this.SERVER_URL + "/getUpcoming")
-                .then(res =>{
-                    return res.json();
-                })
-                .then(songs => {
-                    this.songs = songs || [];
-                    o.next(this.songs);
-                })
+            // fetch(this.SERVER_URL + "/getUpcoming")
+            //     .then(res =>{
+            //         return res.json();
+            //     })
+            //     .then(songs => {
+            //         this.songs = songs || [];
+            //         o.next(this.songs);
+            //     })
         });
     }
 

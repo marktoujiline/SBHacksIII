@@ -7,6 +7,8 @@ let validUrl = require('valid-url');
 // Express stuff
 let cors = require('cors');
 let app = express() 
+var expressWs = require('express-ws')(app);
+
 app.use(bodyParser.json())
 app.use(cors())
 
@@ -51,25 +53,20 @@ app.post('/addSongByUrl', function(req, res){
 	}
 })
 
+app.ws('/', function(ws, req) {
+  
+	// Register for updates
+	ws.send(JSON.stringify(sm.getUpcoming(5)))
+
+	sm.setChangeCallback(() => {
+		ws.send(JSON.stringify(sm.getUpcoming(5)))
+	});
+});
+
 app.listen(8081, function() {
 	console.log('Listening on port 8081');
 	hardcodeSongs();
 
-});
-
-// Setup the socket
-const wss = new SocketServer({ server: app });
-
-wss.on('connection', function connection(ws) {
-  const location = url.parse(ws.upgradeReq.url, true);
-  // You might use location.query.access_token to authenticate or share sessions
-  // or ws.upgradeReq.headers.cookie (see http://stackoverflow.com/a/16395220/151312)
-
-	ws.on('message', function incoming(message) {
-		console.log('received: %s', message);
-	});
-
-	ws.send(JSON.stringify({message: "connected"}));
 });
 
 

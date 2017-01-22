@@ -15,6 +15,7 @@ class SongManager {
         this.queue = [];
         this.playlist = [];
         this.library = [];
+        this.changeListeners = [];
     }
 
     addToQueue(song) {
@@ -166,7 +167,25 @@ class SongManager {
         return r;
     }
 
-    notifyQueueChange(){}
+    /**
+     * callbacks to execute when the play queue changes
+     */
+    setChangeCallback(l) {
+        this.changeListeners.push(l);
+    }
+
+
+    notifyQueueChange(){
+        console.log("called change listeners");
+        this.changeListeners.forEach((func, i) => {
+            try {
+                func();
+            } catch (e) {
+                console.log("Change callback failed, removed from callbacks");
+                this.changeListeners.splice(i, 1);
+            }
+        });
+    }
 }
 
 module.exports = function() { return new SongManager()};
