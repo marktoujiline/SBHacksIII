@@ -81,7 +81,7 @@ class SongManager {
 						url: "https://youtu.be/" + result.items[0].id.videoId,
 						user: user,
 						votes: 1,
-						date: new Date()
+						date: new Date
 					};
 
                     this.addToLibrary(sobj);
@@ -105,15 +105,15 @@ class SongManager {
             } else {
                 youtubeParser.getMetadata(song).then(
                     (metadata) => {
-                        o = {
+                        let o = {
                                 title: metadata.title,
                                 url: song,
                                 user: user,
                                 votes: 1,
-                                date: new Date()
+                                date: new Date
                             };
-                        console.log("here");
-                        // this.addToQueue(o);
+                        this.addToQueue(o);
+                        
                         resolve(o);
                 }).catch(err => console.log(err));
             }

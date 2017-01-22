@@ -84,27 +84,13 @@ app.listen(8081, function() {
 
 let hardcodeSongs = function(){
 	Promise.all(
-		sm.addToQueueByURL({
-			url : "https://www.youtube.com/watch?v=f8E07NEZMAs",
-			user : "Admin"
-		}),
-		sm.addToQueueByURL({
-			url : "https://www.youtube.com/watch?v=-zHVW7Zy_vg",
-			user : "Admin"
-		}),
-		sm.addToQueueByURL({
-			url : "https://www.youtube.com/watch?v=1Ga5o7JJquQ",
-			user : "Admin"
-		}),
-		sm.addToQueueByURL({
-			url : "https://www.youtube.com/watch?v=sWj2KV2jEPc",
-			user : "Admin"
-		}),
-		sm.addToQueueByURL({
-			url : "https://www.youtube.com/watch?v=Fz8h_q4qvNk",
-			user : "Admin"
-		}))
-	.then((r) => {
-		console.log(sm.queue);
-	})
+		sm.addToQueueByURL("https://www.youtube.com/watch?v=f8E07NEZMAs", "Admin"),
+		sm.addToQueueByURL("https://www.youtube.com/watch?v=-zHVW7Zy_vg", "Admin"),
+		sm.addToQueueByURL("https://www.youtube.com/watch?v=1Ga5o7JJquQ", "Admin"),
+		sm.addToQueueByURL("https://www.youtube.com/watch?v=sWj2KV2jEPc", "Admin"),
+		sm.addToQueueByURL("https://www.youtube.com/watch?v=Fz8h_q4qvNk", "Admin"))
+		.then((r) => {
+			// console.log(r);
+		})
+		console.log("lol")
 }
