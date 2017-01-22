@@ -57,9 +57,7 @@ app.ws('/', function(ws, req) {
 	// Register for updates
 	ws.send(JSON.stringify(sm.getUpcoming(5)))
 
-	sm.setChangeCallback(() => {
-		ws.send(JSON.stringify(sm.getUpcoming(5)))
-	});
+	sm.setChangeCallback(ws);
 });
 
 app.get('/callBack', function(req, res){
