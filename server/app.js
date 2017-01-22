@@ -25,10 +25,6 @@ app.get('/getUpcoming', function (req, res) {
 	res.send(sm.getUpcoming(n));
 })
 
-app.post('/addToLibrary', function(req, res) {
-
-});
-
 // TODO: change, shouldn't be url if it is a name
 app.post('/addSongByUrl', function(req, res){
 	// TODO: make better
@@ -61,21 +57,36 @@ app.ws('/', function(ws, req) {
 	// Register for updates
 	ws.send(JSON.stringify(sm.getUpcoming(5)))
 
-	sm.setChangeCallback(() => {
-		ws.send(JSON.stringify(sm.getUpcoming(5)))
-	});
+	sm.setChangeCallback(ws);
 });
 
-app.get('/callBack', function(req, res)){
+app.get('/callBack', function(req, res){
 	res.send("This is crazy, so call me maybe!");
-}
+});
 
 app.listen( process.env.PORT || 8081, function() {
 	console.log('Listening on port 8081');
-	hardcodeSongs();
-
+	//hardcodeSongs();
 });
 
+app.post('/addPlaylist', function(req, res){
+	p = [];
+	let playlist = req.body.items;
+	for ( let i = 0 ; i < playlist.length ; i++ ){
+		let name = playlist[i].name;
+		for( let j = 0 ; j < playlist[i].artists.length ; j++){
+			name = name + " " + playlist[i].artists[j].name;
+		}
+		p.push(sm.createSongFromName(name).then( (o) => {
+			sm.addToLibrary(o);		
+		}));
+	}
+
+	Promise.all(p).then(() => sm.fillPlaylist(5))
+		.catch((e) => console.log(e));
+
+	res.status(200).send("Playlist received");
+});
 
 let hardcodeSongs = function(){
 	a = [];	

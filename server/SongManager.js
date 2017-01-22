@@ -63,12 +63,13 @@ class SongManager {
         while(this.playlist.length < size && this.playlist.length < this.library.length){
             this.addToPlaylist(this.library[Math.floor(Math.random() * this.library.length)]);
         }
+        this.notifyQueueChange();
     }
 
     /**
      * Returns a prommise resolving to the added song
      */
-    addToQueueByName(name, user) {
+    createSongFromName(name, user) {
         return new Promise((resolve, reject) => {
             // Search for the url
             youtubeSearch.search(name, 1, (error, result) => {
@@ -89,11 +90,6 @@ class SongManager {
 						votes: 0,
 						date: new Date
 					};
-					
-					console.log("Creating by name: ");
-
-                    ///this.addToLibrary(sobj);
-					this.addToQueue(sobj);
 					resolve(sobj);
 				}
 			});
@@ -101,11 +97,19 @@ class SongManager {
         });
     }
 
+    addToQueueByName(name, user) {
+        return this.createSongFromName(name, user)
+                .then((o) => {
+					//this.addToLibrary(o);
+                    this.addToQueue(o);
+                    return o;
+                });
+    }
     /**
      * Returns a prommise resolving to the added song
      */
-    addToQueueByURL(song, user) {
-        return this.createSongFromURL(song, user)
+    addToQueueByURL(url, user) {
+        return this.createSongFromURL(url, user)
                 .then((o) => {
 					//this.addToLibrary(o);
                     this.addToQueue(o);
@@ -154,6 +158,7 @@ class SongManager {
         } else {
             return this.playlist.shift();
         }
+        this.notifyQueueChange();
     }
 
     getUpcoming(amount) {
@@ -177,13 +182,10 @@ class SongManager {
 
 
     notifyQueueChange(){
-        this.changeListeners.forEach((func, i) => {
-            try {
-                func();
-            } catch (e) {
-                console.log("Change callback failed, removed from callbacks");
-                this.changeListeners.splice(i, 1);
-            }
+        // Remove stale sockets
+        this.changeListeners = this.changeListeners.filter((ws) => ws.readyState === ws.OPEN);
+        this.changeListeners.forEach((ws) => {
+            ws.send(JSON.stringify(sm.getUpcoming(5)));
         });
     }
 }

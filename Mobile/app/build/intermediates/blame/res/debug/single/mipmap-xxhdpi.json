@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/Users/checkoutuser/Workspace/server/SBHacksIII/Mobile/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/ic_launcher.png",
+        "source": "/Users/checkoutuser/Workspace/server/SBHacksIII/Mobile/app/src/main/res/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/checkoutuser/AndroidStudioProjects/MyApplication/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/ic_launcher.png",
+        "source": "/Users/checkoutuser/AndroidStudioProjects/MyApplication/app/src/main/res/mipmap-xxhdpi/ic_launcher.png"
+    }
+]
